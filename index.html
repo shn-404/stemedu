@@ -22,7 +22,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard Variable", Pretendard, sans-serif; }
-        body { background-color: var(--white); color: var(--text-main); line-height: 1.7; letter-spacing: -0.3px; }
+        body { background-color: var(--white); color: var(--text-main); line-height: 1.7; letter-spacing: -0.3px; overflow-x: hidden; }
 
         /* GNB 구조 고도화 및 하위메뉴 깨짐 방지 */
         header {
@@ -41,7 +41,7 @@
         nav > ul > li > a { font-size: 1.05rem; font-weight: 700; color: var(--text-main); padding: 0 1.2rem; cursor: pointer; height: 100%; display: flex; align-items: center; text-decoration: none; transition: var(--transition); }
         nav > ul > li:hover > a, nav > ul > li > a.active { color: #00A3B8; }
         
-        /* 드롭다운 메뉴 스타일 초기화 및 절대좌표 고정 (디자인 깨짐 수정) */
+        /* 드롭다운 메뉴 스타일 초기화 및 절대좌표 고정 */
         .dropdown-menu {
             position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
             background: var(--white); border: 1px solid var(--border); border-radius: 0 0 12px 12px;
@@ -58,6 +58,34 @@
             cursor: pointer; box-shadow: 0 4px 12px rgba(10, 25, 49, 0.15);
         }
         .cta-btn-fixed:hover { background-color: #11274c; transform: translateY(-2px); border-color: var(--accent); }
+
+        /* 모바일 햄버거 버튼 & 사이드 바 토글 스타일 */
+        .mobile-menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 3000; position: absolute; left: 1.2rem; }
+        .mobile-menu-toggle span { display: block; width: 24px; height: 3px; background: var(--primary); margin: 4px 0; transition: var(--transition); }
+        
+        /* 모바일 활성화 시 햄버거 모양 변경 */
+        .mobile-menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
+        .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -5px); }
+
+        .mobile-sidebar {
+            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
+            background: var(--white); border-right: 1px solid var(--border);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.1); z-index: 2500; transition: var(--transition);
+            padding: 90px 1.5rem 2rem 1.5rem; overflow-y: auto;
+        }
+        .mobile-sidebar.open { left: 0; }
+        .mobile-sidebar-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 2400; display: none; backdrop-filter: blur(2px);
+        }
+
+        .mobile-nav-list { list-style: none; }
+        .mobile-nav-item { border-bottom: 1px solid #F1F5F9; padding: 0.8rem 0; }
+        .mobile-nav-item > a { display: block; font-size: 1.1rem; font-weight: 800; color: var(--primary); text-decoration: none; padding: 0.4rem 0; }
+        .mobile-sub-list { list-style: none; padding-left: 1rem; margin-top: 0.3rem; border-left: 2px solid var(--border); }
+        .mobile-sub-list li a { display: block; font-size: 0.92rem; color: var(--text-muted); text-decoration: none; padding: 0.4rem 0; font-weight: 600; }
+        .mobile-sidebar .cta-btn-mobile { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 1rem; border-radius: 8px; font-weight: 800; font-size: 1rem; margin-top: 2rem; cursor: pointer; }
 
         .page-content { display: none; padding-top: 80px; animation: pageFadeIn 0.35s ease-out; }
         .page-content.active { display: block; }
@@ -194,75 +222,97 @@
         footer { background-color: #1E293B; color: #94A3B8; padding: 4rem 2rem; font-size: 0.9rem; border-top: 1px solid #334155; }
         .footer-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
 
-        /* [미디어 쿼리 최적화 - 모바일 전체 레이아웃 가독성 고도화 및 깨짐 방지] */
+        /* [미디어 쿼리 - 모바일 전용 레이아웃 스케일 개편 및 글자 겹침·비율 완전 정상화] */
         @media (max-width: 1100px) {
             .nav-container nav, .cta-btn-fixed { display: none; }
+            .mobile-menu-toggle { display: block; }
             .nav-container { justify-content: center; height: 65px; }
             .page-content { padding-top: 65px; }
-            section { padding: 4rem 1.2rem; }
+            section { padding: 3.5rem 1.2rem; }
             
-            .center-title-wrap { margin-bottom: 3rem; }
-            .section-title { font-size: 1.8rem; letter-spacing: -0.8px; }
-            .section-subtitle { font-size: 1rem; }
+            .center-title-wrap { margin-bottom: 2.5rem; }
+            .section-title { font-size: 1.6rem; letter-spacing: -0.5px; line-height: 1.4; word-break: keep-all; }
+            .section-subtitle { font-size: 0.95rem; line-height: 1.6; margin-top: 0.6rem; }
 
-            /* 홈 레이아웃 대응 */
-            .hero { padding: 6rem 1.2rem 5rem 1.2rem; }
-            .hero h1 { font-size: 2.2rem; letter-spacing: -1px; margin-bottom: 1.5rem; }
-            .hero p { font-size: 1rem; margin-bottom: 2.5rem; text-align: justify; }
-            .hero .btn-main { padding: 1rem 1.5rem; font-size: 1rem; width: 100%; line-height: 1.4; }
+            /* 홈화면 모바일 최적화 (글 압축 및 가독성 비율 상승) */
+            .hero { padding: 5rem 1.2rem 4rem 1.2rem; }
+            .hero h1 { font-size: 1.9rem; letter-spacing: -0.8px; margin-bottom: 1.2rem; line-height: 1.4; word-break: keep-all; }
+            .hero p { font-size: 0.95rem; margin-bottom: 2rem; text-align: center; color: #CBD5E1; line-height: 1.7; word-break: keep-all; }
+            .hero .btn-main { padding: 1rem 1.2rem; font-size: 0.95rem; width: 100%; line-height: 1.4; word-break: keep-all; white-space: normal; }
 
-            .stats-container { grid-template-columns: 1fr; gap: 1.2rem; margin-top: -2.5rem; padding: 0 1.2rem; }
-            .stat-card { padding: 2rem 1.2rem; }
-            .stat-card h2 { font-size: 2.8rem; }
+            .stats-container { grid-template-columns: 1fr; gap: 1rem; margin-top: -2rem; padding: 0 1.2rem; }
+            .stat-card { padding: 1.5rem 1rem; border-radius: 14px; }
+            .stat-card h2 { font-size: 2.5rem; }
+            .stat-card p { font-size: 0.95rem; }
 
-            .home-grid-row { grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; }
-            .home-corporate-timeline li { padding-left: 1.8rem; }
+            .home-grid-row { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+            .home-corporate-timeline li { padding-left: 1.8rem; margin-bottom: 1.8rem; }
+            .home-corporate-timeline li h4 { font-size: 1.1rem; line-height: 1.4; word-break: keep-all; }
+            .home-corporate-timeline li p { font-size: 0.9rem; line-height: 1.5; word-break: keep-all; }
 
-            /* 사업 모델 및 신념 */
-            .ubion-style-container { grid-template-columns: 1fr; gap: 1.5rem; }
-            .ubion-card-img-holder { height: 140px; font-size: 2.8rem; }
-            .about-vision-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
-            .vision-card { padding: 2.5rem 1.8rem; }
+            /* 비즈니스 모델 & 비전 가로폭 뭉개짐 방지 */
+            .ubion-style-container { grid-template-columns: 1fr; gap: 1.2rem; }
+            .ubion-card-img-holder { height: 120px; font-size: 2.5rem; }
+            .ubion-card-body { padding: 1.5rem; }
+            .ubion-card-body h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+            .ubion-card-body p { font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+            
+            .about-vision-grid { grid-template-columns: 1fr; gap: 1.2rem; margin-top: 1.5rem; }
+            .vision-card { padding: 2rem 1.5rem; border-radius: 14px; }
+            .vision-card h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+            .vision-card p { font-size: 0.92rem; line-height: 1.6; word-break: keep-all; }
 
-            /* 커리큘럼 7대 대형 카드 요소 깨짐 방지 */
-            .program-7-container { gap: 1.5rem; }
-            .prog-row-item { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.8rem 1.2rem; text-align: left; }
-            .prog-badge-num { width: 50px; height: 50px; font-size: 1.1rem; }
-            .prog-target-time { text-align: left; font-size: 0.88rem; margin-top: 0.5rem; padding-top: 0.8rem; border-top: 1px dashed var(--border); }
+            /* 커리큘럼 7대 코스 가독성 정돈 (글씨 뭉침 해소) */
+            .program-7-container { gap: 1.2rem; }
+            .prog-row-item { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem 1.2rem; border-radius: 14px; }
+            .prog-badge-num { width: 45px; height: 45px; font-size: 1rem; }
+            .prog-meta-title h3 { font-size: 1.2rem; line-height: 1.3; word-break: keep-all; }
+            .prog-meta-title span { font-size: 0.8rem; padding: 0.2rem 0.5rem; }
+            .prog-desc-text { font-size: 0.92rem; line-height: 1.6; text-align: justify; word-break: keep-all; }
+            .prog-desc-text ul { margin-top: 0.6rem; padding-left: 0.2rem; }
+            .prog-desc-text ul li { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.4rem; }
+            .prog-target-time { text-align: left; font-size: 0.85rem; margin-top: 0.4rem; padding-top: 0.6rem; border-top: 1px dashed var(--border); }
 
-            /* 강사진 & 전략팀 카드 대응 */
-            .inst-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
-            .inst-card { flex-direction: column; }
-            .inst-img { width: 100%; height: 200px; overflow: hidden; align-items: center; }
-            .inst-img svg { width: auto; height: 85%; }
-            .inst-desc { width: 100%; padding: 1.8rem 1.2rem; }
-            .inst-desc h4 { font-size: 1.35rem; }
+            /* 강사진 프로필 세로배열 유연화 */
+            .faculty-main-wrapper h3 { font-size: 1.35rem; margin-bottom: 1.2rem; }
+            .inst-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+            .inst-card { flex-direction: column; border-radius: 14px; }
+            .inst-img { width: 100%; height: 180px; align-items: center; }
+            .inst-img svg { height: 85%; width: auto; }
+            .inst-desc { width: 100%; padding: 1.5rem 1.2rem; }
+            .inst-desc h4 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+            .inst-desc .bio { padding-top: 0.8rem; }
+            .inst-desc .bio li { font-size: 0.88rem; margin-bottom: 0.4rem; line-height: 1.5; }
 
-            /* 스마트 라운지 카페 공지사항 게시판 테이블 대응 */
+            /* 스마트 라운지 테이블 밀림 방지 모바일 가로 스크롤 적용 */
             .cafe-board-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .cafe-list-table { min-width: 600px; }
-            .cafe-list-table th, .cafe-list-table td { padding: 1rem 0.8rem; font-size: 0.88rem; }
-            .cafe-detail-view { padding: 1.8rem 1.2rem; }
-            .cafe-article-body { font-size: 0.98rem; padding-bottom: 2rem; margin-bottom: 1.5rem; }
-            .comment-textarea { height: 70px; padding: 0.8rem; font-size: 0.9rem; }
+            .cafe-list-table { min-width: 650px; }
+            .cafe-list-table th, .cafe-list-table td { padding: 0.9rem 0.6rem; font-size: 0.88rem; }
+            .cafe-detail-view { padding: 1.5rem 1rem; border-radius: 12px; }
+            .cafe-article-header h3 { font-size: 1.3rem; }
+            .cafe-article-body { font-size: 0.95rem; line-height: 1.7; padding-bottom: 1.5rem; margin-bottom: 1.5rem; word-break: keep-all; }
+            .comment-form-box { padding: 1rem; }
+            .comment-form-box input { width: 100% !important; margin-bottom: 0.5rem; }
+            .comment-textarea { height: 70px; font-size: 0.88rem; }
 
             /* 지원센터 FAQ */
-            .faq-q { padding: 1.2rem; font-size: 1rem; }
-            .faq-a { padding: 1.2rem; font-size: 0.92rem; }
+            .faq-q { padding: 1.1rem; font-size: 0.95rem; line-height: 1.4; }
+            .faq-a { padding: 1.1rem; font-size: 0.9rem; line-height: 1.6; word-break: keep-all; }
 
-            /* 신청 폼 컨테이너 패딩 축소 */
-            .form-page-container { padding: 2.5rem 1.2rem; border-radius: 16px; }
-            .form-grid { grid-template-columns: 1fr; gap: 0px; }
+            /* 입시 신청 폼 정돈 및 인풋 크기 조절 */
+            .form-page-container { padding: 2rem 1.1rem; border-radius: 16px; }
+            .form-grid { grid-template-columns: 1fr; gap: 0; }
             .form-group.fullwidth { grid-column: span 1; }
             .form-group { margin-bottom: 1.2rem; }
-            .form-group label { font-size: 0.9rem; margin-bottom: 0.5rem; }
-            .form-group input, .form-group select, .form-group textarea { padding: 0.8rem; font-size: 0.95rem; }
-            .phone-input-wrapper select { width: 90px; }
-            .btn-submit-direct { padding: 1.1rem; font-size: 1.1rem; }
+            .form-group label { font-size: 0.88rem; margin-bottom: 0.4rem; }
+            .form-group input, .form-group select, .form-group textarea { padding: 0.8rem; font-size: 0.92rem; border-radius: 6px; }
+            .phone-input-wrapper select { width: 85px; }
+            .checkbox-agreement-box label { font-size: 0.85rem; line-height: 1.4; }
+            .btn-submit-direct { padding: 1rem; font-size: 1.05rem; border-radius: 6px; }
 
             /* 푸터 레이아웃 */
-            footer { padding: 3rem 1.2rem; }
-            .footer-inner { flex-direction: column; text-align: center; gap: 1rem; }
+            footer { padding: 2.5rem 1.2rem; font-size: 0.85rem; }
+            .footer-inner { flex-direction: column; text-align: center; gap: 0.8rem; }
         }
     </style>
 </head>
@@ -270,7 +320,14 @@
 
     <header>
         <div class="nav-container">
+            <button class="mobile-menu-toggle" id="mobileMenuBtn" onclick="toggleMobileSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div onclick="navigateTo('home')" class="logo">STEM<span>.</span></div>
+            
             <nav>
                 <ul>
                     <li><a id="nav-home" onclick="navigateTo('home')" class="active">홈</a></li>
@@ -304,6 +361,38 @@
             <button onclick="navigateTo('apply')" class="cta-btn-fixed">무료 진단 신청</button>
         </div>
     </header>
+
+    <div class="mobile-sidebar-backdrop" id="sidebarBackdrop" onclick="toggleMobileSidebar()"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a onclick="closeMobileNav('home')">🏠 홈</a></li>
+            <li class="mobile-nav-item">
+                <a onclick="closeMobileNav('bm')">💼 사업 영역</a>
+                <ul class="mobile-sub-list">
+                    <li><a onclick="closeMobileNav('bm', 'b2c')">▶ B2C 프리미엄 교육</a></li>
+                    <li><a onclick="closeMobileNav('bm', 'b2b')">▶ B2B 기업 역량 교육</a></li>
+                    <li><a onclick="closeMobileNav('bm', 'b2g')">▶ B2G 공공 에듀테크</a></li>
+                </ul>
+            </li>
+            <li class="mobile-nav-item">
+                <a onclick="closeMobileNav('about')">🎯 STEM 신념</a>
+                <ul class="mobile-sub-list">
+                    <li><a onclick="closeMobileNav('about')">▶ 교육 철학 및 비전</a></li>
+                </ul>
+            </li>
+            <li class="mobile-nav-item"><a onclick="closeMobileNav('programs')">📑 교육 커리큘럼</a></li>
+            <li class="mobile-nav-item">
+                <a onclick="closeMobileNav('faculty')">👥 교수진 & 연구원</a>
+                <ul class="mobile-sub-list">
+                    <li><a onclick="closeMobileNav('faculty', 'teacher')">▶ 대치 대표 강사진</a></li>
+                    <li><a onclick="closeMobileNav('faculty', 'strategy')">▶ 입시 데이터 전략팀</a></li>
+                </ul>
+            </li>
+            <li class="mobile-nav-item"><a onclick="closeMobileNav('notices')">📢 학습 공지 라운지</a></li>
+            <li class="mobile-nav-item"><a onclick="closeMobileNav('support')">❓ 고객지원 FAQ</a></li>
+        </ul>
+        <button class="cta-btn-mobile" onclick="closeMobileNav('apply')">⚡ 무료 진단 코스 신청</button>
+    </div>
 
     <div id="page-home" class="page-content active">
         <section class="hero">
@@ -436,7 +525,7 @@
                 <div class="about-vision-grid">
                     <div class="vision-card">
                         <h3>🔬 데이터 기반 정밀 진단</h3>
-                        <p>심증 and 감에 의존하는 상담은 아이를 무너뜨립니다. STEM은 오답을 도출하기까지의 타이핑 속도와 지체 메커니즘을 빅데이터로 정밀 계측하여 처방합니다.</p>
+                        <p>심증 및 감에 의존하는 상담은 아이를 무너뜨립니다. STEM은 오답을 도출하기까지의 타이핑 속도와 지체 메커니즘을 빅데이터로 정밀 계측하여 처방합니다.</p>
                     </div>
                     <div class="vision-card light">
                         <h3>🤝 최상위권 엘리트 연합</h3>
@@ -484,7 +573,7 @@
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">04</div>
-                        <div class="prog-meta-title"><h3>AI 연동 1:1 초개인화 테크니컬 오답 클 Clinic</h3><span>대상: 전 학년 성적 정체기 및 특정 단원 펑크 학생</span></div>
+                        <div class="prog-meta-title"><h3>AI 연동 1:1 초개인화 테크니컬 오답 클리닉</h3><span>대상: 전 학년 성적 정체기 및 특정 단원 펑크 학생</span></div>
                         <div class="prog-desc-text"> 학생 개개인의 문제 풀이 프로세스를 클라우드 AI 엔진이 정밀 감지합니다. 식을 전개하다가 멈춘 부분의 지체 시간까지 데이터 레이어로 계측하여, 학생 한 명만을 위한 고유의 오답 변형 교재 및 3배수 타겟 유사 문항지를 매주 POD 인쇄 및 맞춤형 바인딩 제본 형태로 즉시 지급합니다. <ul> <li>• <strong>주요 진도:</strong> 개인별 약점 단원 핀포인트 집중 타격, 역구술 화이트보드 피드백 오답 제로 클리닉</li> <li>• <strong>사용 교재:</strong> AI 가 생성한 단 한 사람만을 위한 고유의 아카이브 북 [My-STEM Response Only]</li> </ul> </div>
                         <div class="prog-target-time">시간표 자율 맞춤제<br>주 1~3회 선택 연동 매니지먼트</div>
                     </div>
@@ -633,7 +722,7 @@
             <div class="section-inner">
                 <div class="center-title-wrap">
                     <span class="section-tag">SUPPORT FAQ</span>
-                    <h2 class="section-title">자주 묻는 핵심 질문입니다.</h2>
+                    <h2 class="section-title">자주 묻는 핵심 질문에 투명하게 답합니다.</h2>
                     <p class="section-subtitle">STEM 매니지먼트 입과 및 지능형 플랫폼 도입 전 가장 문의가 많았던 내용에 대한 가이드라인 리포트입니다.</p>
                 </div>
 
@@ -648,7 +737,7 @@
                     <div class="faq-item">
                         <div class="faq-q" onclick="toggleFaq(this)">Q2. 중간에 반에 신규 합류하게 되면 기존 진도 공백 리스크는 어떻게 케어하나요? <span>▼</span></div>
                         <div class="faq-a">
-                            커리큘럼이 이미 진행 중인 상태에서 진입하더라도 공백 리스크는 제로에 가깝습니다. 입학 즉시 STEM 자체 고안 AI 진단 평가 툴을 가동하여 학생의 선수 학습 상태를 낱낱이 파악합니다.<br><br>
+                            개념이 이미 진행 중인 상태에서 진입하더라도 공백 리스크는 제로에 가깝습니다. 입학 즉시 STEM 자체 고안 AI 진단 평가 툴을 가동하여 학생의 선수 학습 상태를 낱낱이 파악합니다.<br><br>
                             파악된 데이터 레이어를 기반으로 펑크가 난 핵심 개념에 대해서만 표적으로 발췌된 1:1 브릿지 VOD 강좌 및 주말 전임 연구원의 개인 맞춤형 오프라인 클리닉 지도 세션을 무상으로 밀착 연계합니다. 이를 통해 기존 정규반의 진도 속도에 단 2주 만에 안정적으로 연착륙하도록 설계되어 있습니다.
                         </div>
                     </div>
@@ -793,6 +882,39 @@
     </footer>
 
     <script>
+        // 모바일 사이드바 개폐 통제 로직
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobileSidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const toggleBtn = document.getElementById('mobileMenuBtn');
+            
+            if(sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                backdrop.style.display = 'none';
+                toggleBtn.classList.remove('open');
+            } else {
+                sidebar.classList.add('open');
+                backdrop.style.display = 'block';
+                toggleBtn.classList.add('open');
+            }
+        }
+
+        // 모바일 서브메뉴 탭 클릭 완료 시 사이드바를 자동으로 닫으며 해당 탭으로 안착
+        function closeMobileNav(pageId, targetSectionId = null) {
+            toggleMobileSidebar();
+            navigateTo(pageId, targetSectionId);
+        }
+
+        // 연락처 키입력 감지용 자동 하이픈 함수
+        function autoHyphen(target) {
+            let num = target.value.replace(/[^0-9]/g, '');
+            if (num.length <= 4) {
+                target.value = num;
+            } else {
+                target.value = num.substring(0, num.length - 4) + '-' + num.substring(num.length - 4);
+            }
+        }
+
         const cafeDatabase = [
             { id: 7, isNotice: true, title: "[필독] 2027학년도 메디컬 증원 패러다임 변화에 따른 STEM 고3 수시 아키텍처 가이드라인", writer: "입시전략팀", date: "2026.06.10", body: "2027학년도 의과대학 배정 정원 변화 확정 발표안에 따른 대치동 최상위권 수시 지원 배치 스케일링 가이드라인북입니다.<br><br> 전형별 정량 내신 등급의 미세 균열을 세부능력 및 특기사항(세특)의 수리적 직관 깊이로 완전히 메워버리는 역발상 스크럼 배치표가 본원 통합 관제실 서버에 탑재 완료되었습니다. 재원생 학부모님께서는 담당 수석 매니저와의 1:1 대면 세션 일정을 주간 예약 시스템을 통해 선점해 주시기 바랍니다.", comments: [] },
             { id: 6, isNotice: true, title: "[생활통제] 여름방학 하이브리드 올인원 몰입 캠프 스마트 디바이스 전면 통제 및 등원 수칙", writer: "행정지원팀", date: "2026.06.08", body: "오는 7월 전개되는 하이브리드 올인원 몰입 캠프 입과생은 등원 즉시 개인 태블릿과 스마트폰을 본원 전산 보관 락커에 의무 입고해야 합니다.<br><br>인터넷 강의 사이트 외 불필요한 연계 트래픽은 원내 방화벽 엔진에 의해 24시간 실시간 차단 모니터링되며, 일일 의무 자습은 밤 22시 정각에 해제되며, 매일 치러지는 데일리 백지 테스트 미통과 자는 일요일 오전 긴급 스크럼 클리닉 반에 자동 소집 통보됩니다. 한 치의 오차 없는 완벽한 관리를 집행하겠습니다.", comments: [{ id: 1, writer: "고3최강", date: "2026.06.10 21:30", content: "아이의 느슨해진 마음을 빡세게 락인해 주셔서 진심으로 감사합니다. 이번 방학 믿고 전적으로 맡깁니다." }] },
@@ -948,10 +1070,9 @@
         document.getElementById('stemConsultingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitFormBtn');
-            btn.innerText = "제출 중...";
+            btn.innerText = "제출중...";
             btn.disabled = true;
 
-            // [주의] 하단 가이드라인 3단계를 수행한 뒤 획득한 배포 URL을 이곳에 교체해 넣으세요.
             const url = "https://script.google.com/macros/s/AKfycbwYjp_kucLa_wO4P4m4Z1bLm5lgnVjEEXV8W0oewOzDOFFSf67IsqmF6NovjQXSuLpx/exec";
             
             const payload = {
@@ -976,19 +1097,6 @@
                 btn.disabled = false; 
             });
         });
-
-        function autoHyphen(target) {
-            // 숫자 제외한 모든 문자 제거
-            let num = target.value.replace(/[^0-9]/g, '');
-
-            // 7자리 또는 8자리 숫자가 들어올 때 유기적으로 하이픈 위치 조절
-            if (num.length <= 4) {
-                target.value = num;
-            } else {
-                target.value = num.substring(0, num.length - 4) + '-' + num.substring(num.length - 4);
-            }
-        }
-
     </script>
 </body>
 </html>
