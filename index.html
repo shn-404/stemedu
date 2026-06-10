@@ -194,11 +194,75 @@
         footer { background-color: #1E293B; color: #94A3B8; padding: 4rem 2rem; font-size: 0.9rem; border-top: 1px solid #334155; }
         .footer-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
 
+        /* [미디어 쿼리 최적화 - 모바일 전체 레이아웃 가독성 고도화 및 깨짐 방지] */
         @media (max-width: 1100px) {
             .nav-container nav, .cta-btn-fixed { display: none; }
-            .stats-container, .ubion-style-container, .about-vision-grid, .inst-grid, .prog-row-item, .form-grid { grid-template-columns: 1fr; }
+            .nav-container { justify-content: center; height: 65px; }
+            .page-content { padding-top: 65px; }
+            section { padding: 4rem 1.2rem; }
+            
+            .center-title-wrap { margin-bottom: 3rem; }
+            .section-title { font-size: 1.8rem; letter-spacing: -0.8px; }
+            .section-subtitle { font-size: 1rem; }
+
+            /* 홈 레이아웃 대응 */
+            .hero { padding: 6rem 1.2rem 5rem 1.2rem; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: -1px; margin-bottom: 1.5rem; }
+            .hero p { font-size: 1rem; margin-bottom: 2.5rem; text-align: justify; }
+            .hero .btn-main { padding: 1rem 1.5rem; font-size: 1rem; width: 100%; line-height: 1.4; }
+
+            .stats-container { grid-template-columns: 1fr; gap: 1.2rem; margin-top: -2.5rem; padding: 0 1.2rem; }
+            .stat-card { padding: 2rem 1.2rem; }
+            .stat-card h2 { font-size: 2.8rem; }
+
+            .home-grid-row { grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; }
+            .home-corporate-timeline li { padding-left: 1.8rem; }
+
+            /* 사업 모델 및 신념 */
+            .ubion-style-container { grid-template-columns: 1fr; gap: 1.5rem; }
+            .ubion-card-img-holder { height: 140px; font-size: 2.8rem; }
+            .about-vision-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+            .vision-card { padding: 2.5rem 1.8rem; }
+
+            /* 커리큘럼 7대 대형 카드 요소 깨짐 방지 */
+            .program-7-container { gap: 1.5rem; }
+            .prog-row-item { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.8rem 1.2rem; text-align: left; }
+            .prog-badge-num { width: 50px; height: 50px; font-size: 1.1rem; }
+            .prog-target-time { text-align: left; font-size: 0.88rem; margin-top: 0.5rem; padding-top: 0.8rem; border-top: 1px dashed var(--border); }
+
+            /* 강사진 & 전략팀 카드 대응 */
+            .inst-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
+            .inst-card { flex-direction: column; }
+            .inst-img { width: 100%; height: 200px; overflow: hidden; align-items: center; }
+            .inst-img svg { width: auto; height: 85%; }
+            .inst-desc { width: 100%; padding: 1.8rem 1.2rem; }
+            .inst-desc h4 { font-size: 1.35rem; }
+
+            /* 스마트 라운지 카페 공지사항 게시판 테이블 대응 */
+            .cafe-board-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .cafe-list-table { min-width: 600px; }
+            .cafe-list-table th, .cafe-list-table td { padding: 1rem 0.8rem; font-size: 0.88rem; }
+            .cafe-detail-view { padding: 1.8rem 1.2rem; }
+            .cafe-article-body { font-size: 0.98rem; padding-bottom: 2rem; margin-bottom: 1.5rem; }
+            .comment-textarea { height: 70px; padding: 0.8rem; font-size: 0.9rem; }
+
+            /* 지원센터 FAQ */
+            .faq-q { padding: 1.2rem; font-size: 1rem; }
+            .faq-a { padding: 1.2rem; font-size: 0.92rem; }
+
+            /* 신청 폼 컨테이너 패딩 축소 */
+            .form-page-container { padding: 2.5rem 1.2rem; border-radius: 16px; }
+            .form-grid { grid-template-columns: 1fr; gap: 0px; }
             .form-group.fullwidth { grid-column: span 1; }
-            .hero h1 { font-size: 2.8rem; }
+            .form-group { margin-bottom: 1.2rem; }
+            .form-group label { font-size: 0.9rem; margin-bottom: 0.5rem; }
+            .form-group input, .form-group select, .form-group textarea { padding: 0.8rem; font-size: 0.95rem; }
+            .phone-input-wrapper select { width: 90px; }
+            .btn-submit-direct { padding: 1.1rem; font-size: 1.1rem; }
+
+            /* 푸터 레이아웃 */
+            footer { padding: 3rem 1.2rem; }
+            .footer-inner { flex-direction: column; text-align: center; gap: 1rem; }
         }
     </style>
 </head>
@@ -372,7 +436,7 @@
                 <div class="about-vision-grid">
                     <div class="vision-card">
                         <h3>🔬 데이터 기반 정밀 진단</h3>
-                        <p>심증과 감에 의존하는 상담은 아이를 무너뜨립니다. STEM은 오답을 도출하기까지의 타이핑 속도와 지체 메커니즘을 빅데이터로 정밀 계측하여 처방합니다.</p>
+                        <p>심증 and 감에 의존하는 상담은 아이를 무너뜨립니다. STEM은 오답을 도출하기까지의 타이핑 속도와 지체 메커니즘을 빅데이터로 정밀 계측하여 처방합니다.</p>
                     </div>
                     <div class="vision-card light">
                         <h3>🤝 최상위권 엘리트 연합</h3>
@@ -399,92 +463,50 @@
                 <div class="program-7-container">
                     <div class="prog-row-item">
                         <div class="prog-badge-num">01</div>
-                        <div class="prog-meta-title"><h3>중등 수학 기하·대수 직관 완성 코스</h3><span>대상: 중2 ~ 중3 영재교/과고/자사고 준비생</span></div>
-                        <div class="prog-desc-text">
-                            고등 수학 전 영역의 유기적 뼈대가 되는 유클리드 기하학과 하이퍼 대수 구조론의 본질을 완벽히 정복합니다. 단순 공식을 암기하여 기계적으로 대입하는 버릇을 근본적으로 차단하며, 백지 노트를 활용한 구조 해석 및 증명 수업을 고집합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 평면도형의 성질 완벽 증명, 해석기하학 기초 메커니즘, 고차방정식과 연립함수의 기하학적 결합</li>
-                                <li>• <strong>사용 교재:</strong> STEM 자체 발간 영재 아키텍처 기하 Vol.1 / 킬러 변형 프린트 마스터</li>
-                            </ul>
-                        </div>
-                        <div class="prog-target-time">주 2회 운영<br>회당 4시간 (강의 2h + 스크럼 2h)</div>
+                        <div class="prog-meta-title"><h3>중등 수학 기하·대수 하이퍼 속진반</h3><span>대상: 영재학교·과학고 및 대치권 자사고 진학 희망 중학생</span></div>
+                        <div class="prog-desc-text"> 중등 과정의 핵심 도식 논리와 대수학적 구조를 관통하여 고등 킬러 문항해석의 주춧돌을 세우는 특별 속진 코스입니다. 단순 공식 암기를 철저히 배제하고 하나의 정리를 유도하기 위해 역구술 화이트보드 증명 논법을 강도 높게 훈련합니다. <ul> <li>• <strong>주요 진도:</strong> 유클리드 기하학 심화 해석, 다항식의 대수적 분할 메커니즘, 평면좌표계 변환 법칙</li> <li>• <strong>사용 교재:</strong> STEM 자체 발간 최고존엄 [기하 하이퍼 아키텍처] / 대치 연구소 고유 변형 문제 은행</li> </ul> </div>
+                        <div class="prog-target-time">주 2회 운영<br>회당 4시간 (테스트 1시간 의무 포함)</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">02</div>
-                        <div class="prog-meta-title"><h3>고등 수학 공통과정(수Ⅰ/수Ⅱ) 킬러 격파반</h3><span>대상: 고1 ~ 고2 모의고사 고정 1~2등급 목표생</span></div>
-                        <div class="prog-desc-text">
-                            평가원 기출 데이터에서 오답률 최상위를 기록하는 다항함수의 추론, 수열의 귀납적 정의, 삼각함수의 그래프 추론 문항을 완벽하게 무력화합니다. 출제 위원급 시각에서 조건의 대칭성과 주기성, 특이점의 한계치를 직관적으로 간파하는 '회로 형성' 훈련을 진행합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 삼각함수 극대/극소 그래프 추론 알고리즘, 수열의 나열을 통한 규칙성 일반화, 수Ⅱ 미적분 통합 22번 구조 해체</li>
-                                <li>• <strong>사용 교재:</strong> STEM 수능 시크릿 킬러 분석서(공통) / 최근 5개년 평가원 전 문항 전사 수록집</li>
-                            </ul>
-                        </div>
+                        <div class="prog-meta-title"><h3>고등 수학Ⅰ·Ⅱ 대치동 내신 최고점 전략반</h3><span>대상: 강남·서초·송파 주요 자사고 및 일반고 내신 1등급 목표 고1~고2</span></div>
+                        <div class="prog-desc-text"> 교육특구 내신 기출의 출제 메커니즘을 정밀 해체하여 고도의 변형 패턴을 예측 집도합니다. 제한된 50분이라는 실전 타임스탬프 속에서 복합 격자점 개수 세기, 지수로그함수의 기하학적 대칭성을 직관적으로 꿰뚫어 단 30초 만에 정답 회로를 전개하도록 숙달시킵니다. <ul> <li>• <strong>주요 진도:</strong> 삼각함수의 주기성 복합 추론, 수열의 귀납적 정의 킬러 문항 정사, 함수의 연속성 특이점 판별</li> <li>• <strong>사용 교재:</strong> 대치 본원 시크릿 족보 마스터피스 / 최근 5개년 평가원 전 문항 전사 수록집</li> </ul> </div>
                         <div class="prog-target-time">주 2회 운영<br>회당 4.5시간 (초밀착 클리닉 연계)</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">03</div>
                         <div class="prog-meta-title"><h3>미적분·기하 선택과정 초밀착 심화반</h3><span>대상: 고2 ~ 고3 전국구 의치한수 수석 목표 극상위권</span></div>
-                        <div class="prog-desc-text">
-                            초월함수의 복합 개형 분석, 매개변수 및 음함수 미분법, 복합 공간도형 내 벡터 정사영 문항을 완벽히 정복하는 코스입니다. 한 치의 정체도 허용하지 않는 엄밀한 수식 전개와 기하학적 직관력을 완벽히 융합하여 수능 수학 영역 100점 만점을 완벽하게 견인합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 초월함수와 합성함수의 극값 조건 추론, 정적분으로 정의된 함수의 대칭성 패턴, 공간 좌표계 변환법</li>
-                                <li>• <strong>사용 교재:</strong> Hyper-STEM 미적분 최고난도 파이널북 / 대치동 최정상 연구원 연합 모의고사</li>
-                            </ul>
-                        </div>
+                        <div class="prog-desc-text"> 초월함수의 복합 개형 분석, 매개변수 및 음함수 미분법, 복합 공간도형 내 벡터 정사영 문항을 완벽히 정복하는 코스입니다. 한 치의 정체도 허용하지 않는 엄밀한 수식 전개와 기하학적 직관력을 완벽히 융합하여 수능 수학 영역 100점 만점을 완벽하게 견인합니다. <ul> <li>• <strong>주요 진도:</strong> 초월함수와 합성함수의 극값 조건 추론, 정적분으로 정의된 함수의 대칭성 패턴, 공간 좌표계 변환법</li> <li>• <strong>사용 교재:</strong> Hyper-STEM 미적분 최고난도 파이널북 / 대치동 최정상 연구원 연합 모의고사</li> </ul> </div>
                         <div class="prog-target-time">주 1회 집중반<br>회당 5시간 라이브 (일요일 상설)</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">04</div>
-                        <div class="prog-meta-title"><h3>AI 연동 1:1 초개인화 테크니컬 오답 클리닉</h3><span>대상: 전 학년 성적 정체기 및 특정 단원 펑크 학생</span></div>
-                        <div class="prog-desc-text">
-                            학생 개개인의 문제 풀이 프로세스를 클라우드 AI 엔진이 정밀 감지합니다. 식을 전개하다가 멈춘 부분의 지체 시간까지 데이터 레이어로 계측하여, 학생 한 명만을 위한 고유의 오답 변형 교재 및 3배수 타겟 유사 문항지를 매주 POD 인쇄 및 맞춤형 바인딩 제본 형태로 즉시 지급합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 개인별 약점 단원 핀포인트 집중 타격, 역구술 화이트보드 피드백 오답 제로 솔루션</li>
-                                <li>• <strong>사용 교재:</strong> AI 맞춤형 1인 전용 제본서 [My-STEM 맞춤 바이블] (매주 데이터 갱신 발간)</li>
-                            </ul>
-                        </div>
-                        <div class="prog-target-time">상시 예약 매칭제<br>평일/주말 매칭 연구원 맞춤 배정</div>
+                        <div class="prog-meta-title"><h3>AI 연동 1:1 초개인화 테크니컬 오답 클 Clinic</h3><span>대상: 전 학년 성적 정체기 및 특정 단원 펑크 학생</span></div>
+                        <div class="prog-desc-text"> 학생 개개인의 문제 풀이 프로세스를 클라우드 AI 엔진이 정밀 감지합니다. 식을 전개하다가 멈춘 부분의 지체 시간까지 데이터 레이어로 계측하여, 학생 한 명만을 위한 고유의 오답 변형 교재 및 3배수 타겟 유사 문항지를 매주 POD 인쇄 및 맞춤형 바인딩 제본 형태로 즉시 지급합니다. <ul> <li>• <strong>주요 진도:</strong> 개인별 약점 단원 핀포인트 집중 타격, 역구술 화이트보드 피드백 오답 제로 클리닉</li> <li>• <strong>사용 교재:</strong> AI 가 생성한 단 한 사람만을 위한 고유의 아카이브 북 [My-STEM Response Only]</li> </ul> </div>
+                        <div class="prog-target-time">시간표 자율 맞춤제<br>주 1~3회 선택 연동 매니지먼트</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">05</div>
-                        <div class="prog-meta-title"><h3>수능 영어 빈칸·순서 로지컬 싱킹 마스터</h3><span>대상: 고2 ~ 고3 만년 2등급에서 절대평가 고정 1등급 도약 희망자</span></div>
-                        <div class="prog-desc-text">
-                            단순한 감이나 배경지식으로 대충 번역해 맞춰오던 불안정한 독해 방식을 근본적으로 단절시킵니다. 지문 내부에 숨겨진 핵심 논리 구조(인과관계, 대조, 환언)의 공식을 정형화하여, 평가원이 오답 선지를 구성하는 5가지 매커니즘을 논리적으로 소거하고 정답만 골라내는 눈을 갖추게 합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 고난도 빈칸추론 4문항 타겟팅, 글의 순서 배열 및 문장 삽입 오답률 제로화 공식 수립</li>
-                                <li>• <strong>사용 교재:</strong> 크리스틴 강 수석 특허 [로지컬 오답 소거 매뉴얼 33 법칙]</li>
-                            </ul>
-                        </div>
-                        <div class="prog-target-time">주 1회 운영<br>회당 3.5시간 (영어 전문 어휘 테스트 연동)</div>
+                        <div class="prog-meta-title"><h3>의학계열 지능형 MMI 면접 & 수리논술 마스터 클래스</h3><span>대상: 전국 의대·치대·한의대·약대 수시전형 최종 합격 타겟 권역</span></div>
+                        <div class="prog-desc-text"> 의대 합격의 최종 관문인 다중 미니 면접(MMI)과 주요 명문대 생명과학·화학 연계 수리논술을 입체적으로 대비합니다. 생명 윤리 딜레마 상황의 인과관계 아키텍처 제시, 논리적 반론 꺾기 전술 등 교수진의 심층 압박 질문에 당황하지 않고 통계 레이아웃을 기반으로 답변하는 완벽한 솔루션을 전수합니다. <ul> <li>• <strong>주요 진도:</strong> 의료 인문학 시나리오 다각적 해체 분석, 고난도 대학별 기출 수리논술 엄밀 증명법</li> <li>• <strong>사용 교재:</strong> STEM 메디컬 융합 면접 바이블 리포트 / MMI 최신 출제 트렌드 시크릿 북</li> </ul> </div>
+                        <div class="prog-target-time">주 1회 상설 전개<br>회당 4시간 (1:1 비디오 정밀 레코딩 피드백 포함)</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">06</div>
-                        <div class="prog-meta-title"><h3>프리미엄 메디컬·SKY 학생부 종합 매이킹</h3><span>대상: 고1 ~ 고3 학업 역량과 학생부의 심화 결합이 필요한 학종 준비생</span></div>
-                        <div class="prog-desc-text">
-                            목표 대학의 최신 전형 요강 및 교수진 연구 논문 테마를 심층 분석하여, 학교 교과 수업 내 활동과 연계 가능한 독창적 탐구 보고서 주제를 추천합니다. 생활기록부 세부능력 및 특기사항에 학생의 자기주도성과 전공적합성이 완벽하게 기재될 수 있도록 전 과정을 밀착 서포트합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 세특 주제 연계성 분석 매트릭스, 탐구 활동 보고서 개요 작성 실습, 대학별 모의 면접 시뮬레이션</li>
-                                <li>• <strong>사용 교재:</strong> STEM 입시연구소 비밀 데이터베이스 리포트 [메디컬 합격 생기부 패스파인더]</li>
-                            </ul>
-                        </div>
+                        <div class="prog-meta-title"><h3>프리미엄 메디컬·SKY 학생부 종합 메이킹</h3><span>대상: 중3 ~ 고3 학생부 종합전형으로 메이저 대학 진입 설계 희망자</span></div>
+                        <div class="prog-desc-text"> 단순 스펙 나열을 지양하고, 학생 고유의 학업적 역량과 문제 해결 능력이 학교 생활기록부 전반에 입체적으로 드러나도록 가이드합니다. 담당 입시전략 수석 연구원이 주기적으로 학교 수업 내 활동과 연계 가능한 독창적 탐구 보고서 주제를 추천합니다. 생활기록부 세부능력 및 특기사항에 학생의 자기주도성과 전공적합성이 완벽하게 기재될 수 있도록 전 과정을 밀착 서포트합니다. <ul> <li>• <strong>주요 진도:</strong> 세특 주제 연계성 분석 매트릭스, 탐구 활동 보고서 개요 작성 실습, 대학별 모의 면접 시뮬레이션</li> <li>• <strong>사용 교재:</strong> STEM 입시연구소 비밀 데이터베이스 리포트 [메디컬 합격 생기부 패스파인더]</li> </ul> </div>
                         <div class="prog-target-time">월 1회 정기 스크럼 세션<br>온·오프라인 하이브리드 파일 피드백 포함</div>
                     </div>
 
                     <div class="prog-row-item">
                         <div class="prog-badge-num">07</div>
                         <div class="prog-meta-title"><h3>N수 수능 최상위권 전과목 하이퍼 파이널</h3><span>대상: 수능 전과목 만점을 목표로 레이스를 전개하는 N수생 및 유학생</span></div>
-                        <div class="prog-desc-text">
-                            9월 평가원 모의고사 이후 수능 당일까지 완벽한 생체 시계 세팅과 최상의 두뇌 컨디션 유지를 목표로 삼는 고밀도 파이널 실전 통제 코스입니다. 실전 모의고사 출제 트렌드를 총망라하여 시간 안배 훈련, OMR 마킹 실수 방지 훈련, 멘탈 무력화 방지 멘토링까지 전인격적으로 관리합니다.
-                            <ul>
-                                <li>• <strong>주요 진도:</strong> 전과목 수능 매커니즘 하이퍼 실전 모의고사 매주 3회 실시, 오답 유형 실시간 관제 리포트 배포</li>
-                                <li>• <strong>사용 교재:</strong> STEM 최종 파이널 예측 팩 [The Final-STEM Secret Project]</li>
-                            </ul>
-                        </div>
+                        <div class="prog-desc-text"> 9월 평가원 모의고사 이후 수능 당일까지 완벽한 생체 시계 세팅과 최상의 두뇌 컨디션 유지를 목표로 삼는 고밀도 파이널 실전 통제 코스입니다. 실전 모의고사 출제 트렌드를 총망라하여 시간 안배 훈련, OMR 마킹 실수 방지 훈련, 멘탈 무력화 방지 멘토링까지 전인격적으로 관리합니다. <ul> <li>• <strong>주요 진도:</strong> 전과목 수능 매커니즘 하이퍼 실전 모의고사 매주 3회 실시, 오답 유형 실시간 관제 리포트 배포</li> <li>• <strong>사용 교재:</strong> STEM 최종 파이널 예측 팩 [The Final-STEM Secret Project]</li> </ul> </div>
                         <div class="prog-target-time">매일 의무 상주제 운영<br>08:00 ~ 22:00 프리미엄 독서실 지정좌석 연동</div>
                     </div>
                 </div>
@@ -506,24 +528,24 @@
                         <div class="inst-card">
                             <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
                             <div class="inst-desc">
-                                <h4>정지훈 대표원장 (수학)</h4>
+                                <h4>강태윤 대표강사 (수학 영역)</h4>
                                 <ul class="bio">
-                                    <li>• 서울대학교 수리과학부 우등 졸업</li>
-                                    <li>• 前 대치 메가스터디 고등부 최상위 의치한반 대표 강사</li>
-                                    <li>• 메이저 모의평가 수리 영역 출제 위원 검수관</li>
-                                    <li>• STEM 고등부 수리 논리 메커니즘 교재 총괄 저자</li>
+                                    <li>• 서울대학교 수리과학부 최우등 졸업</li>
+                                    <li>• 前 메가스터디 러셀 최상위권 의대반 수석 강사</li>
+                                    <li>• STEM 수리 알고리즘 변형 문항 교재 총괄 감수자</li>
+                                    <li>• 연속 3개년 수능 수학 영역 만점자 총 47명 배출</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="inst-card">
                             <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
                             <div class="inst-desc">
-                                <h4>크리스틴 강 수석 (영어)</h4>
+                                <h4>이지원 수석 연구원 (과학 영역)</h4>
                                 <ul class="bio">
-                                    <li>• UC Berkeley 언어학 학사 졸업</li>
-                                    <li>• 前 대치 시대인재 고등부 수능 영어 논리 논증 반 전임</li>
-                                    <li>• EBS 수능 특강 변형 문제집 독점 출제 연구 위원</li>
-                                    <li>• 빈칸 추론 메커니즘 소거법 독점 특허 보유</li>
+                                    <li>• 카이스트(KAIST) 생명화학공학 박사수료</li>
+                                    <li>• 대치 본원 MMI 의학 면접 전임 패널 위원장</li>
+                                    <li>• 6월/9월 평가원 모의고사 변형 연계 예측률 98.2%</li>
+                                    <li>• 매디컬 올인원 논술 시크릿 서적 베스트셀러 저자</li>
                                 </ul>
                             </div>
                         </div>
@@ -531,7 +553,7 @@
                 </div>
 
                 <div class="faculty-main-wrapper" id="target-strategy">
-                    <h3>📊 AI 입시 데이터 및 생기부 전략 연구원 팀</h3>
+                    <h3>📊 입시 데이터 & 인공지능 엔지니어링 전략팀</h3>
                     <div class="inst-grid">
                         <div class="inst-card">
                             <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
@@ -559,7 +581,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
@@ -589,25 +610,21 @@
                 </div>
 
                 <div id="cafe-detail-view" class="cafe-detail-view">
-                    <button class="cafe-detail-back-btn" onclick="closeArticle()">← 목록으로 돌아가기</button>
-                    <div class="cafe-article-header">
-                        <h3 id="detail-title" class="cafe-article-title">제목</h3>
-                        <div style="color:var(--text-muted); font-size:0.9rem;">작성자: <span id="detail-writer" style="font-weight:700; color:#333;"></span> | 작성일: <span id="detail-date"></span></div>
-                    </div>
-                    <div id="detail-body" class="cafe-article-body">본문</div>
-
-                    <div>
-                        <h5 style="font-size:1.1rem; margin-bottom:1rem;">댓글 <span id="comment-count" class="comment-count-badge">0</span></h5>
-                        <ul id="article-comment-list" class="comment-list"></ul>
+                    <button onclick="backToCafeList()" class="cafe-detail-back-btn">⬅️ 목록으로 돌아가기</button>
+                    <div id="cafe-detail-render-target"></div>
+                    
+                    <div style="margin-top: 3rem;">
+                        <h4 style="font-size:1.1rem; font-weight:800; color:var(--primary); margin-bottom:1rem;">💬 실시간 소통 댓글 스크럼</h4>
+                        <ul class="comment-list" id="cafe-comment-render-target"></ul>
+                        
                         <div class="comment-form-box">
-                            <input type="text" id="comment-nickname" placeholder="닉네임" value="열공학부모" style="padding:0.4rem; margin-bottom:0.5rem; border:1px solid var(--border); border-radius:4px;"><br>
-                            <textarea id="comment-content" class="comment-textarea" placeholder="선플은 학생과 강사진에게 큰 힘이 됩니다."></textarea>
-                            <button class="comment-submit-btn" onclick="addCommentSubmit()">댓글 등록</button>
+                            <input type="text" id="comment-nickname" placeholder="학습용 닉네임 입력 (예: 대치맘)" style="width:250px; margin-bottom:0.5rem; display:block; padding:0.5rem; border:1px solid var(--border); border-radius:4px;">
+                            <textarea id="comment-content" class="comment-textarea" placeholder="타인을 비방하거나 무분별한 광고성 댓글은 경고 없이 통제 삭제 조치됩니다."></textarea>
+                            <button onclick="addCommentSubmit()" class="comment-submit-btn">댓글 등록하기</button>
                             <div style="clear:both;"></div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
@@ -615,48 +632,44 @@
     <div id="page-support" class="page-content">
         <section style="background-color: var(--bg-light);">
             <div class="section-inner">
+                <div class="center-title-wrap">
+                    <span class="section-tag">SUPPORT FAQ</span>
+                    <h2 class="section-title">자주 묻는 핵심 질문에 투명하게 답합니다.</h2>
+                    <p class="section-subtitle">STEM 매니지먼트 입과 및 지능형 플랫폼 도입 전 가장 문의가 많았던 내용에 대한 가이드라인 리포트입니다.</p>
+                </div>
+
                 <div class="support-wrapper">
-                    <div class="faq-accordion">
-                        <h3 style="text-align:center; margin-bottom:3.5rem; font-size:2rem; font-weight:900; color:var(--primary);">학부모 필수 확인 FAQ 리포트</h3>
-                        
-                        <div class="faq-item">
-                            <div class="faq-q" onclick="toggleFaq(this)">Q1. 일반 판서식 대형 학원들과의 결정적인 차별점은 무엇입니까? <span>▼</span></div>
-                            <div class="faq-a">
-                                대형 인터넷 강의나 일반적인 판서식 학원은 스타 강사 1명이 일방적으로 쇼를 하고 대부분의 학생은 수동적인 관객이 되어 멍하니 구경을 하다가 귀가합니다. 이는 '공부를 했다'는 일시적인 착각만 유발할 뿐 실질적인 성적 향상으로 연결되지 않습니다.<br><br>
-                                <strong>STEM은 다릅니다.</strong> 개념 강의 세션 직후, 모든 학생은 의무적으로 화이트보드 앞에 서서 자신이 배운 논리의 인과관계를 담당 강사와 연구원에게 거꾸로 직접 말하며 설명해야 합니다. 이 '역구술 메타인지 스크럼'을 통과해야만 다음 단원으로 패스할 수 있는 완벽한 통제형 피드백 시스템을 구축하고 있습니다.
-                            </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q1. 단순 오답 노트 정제와 STEM 의 지능형 오답 클리닉의 결정적 차이는 무엇인가요? <span>▼</span></div>
+                        <div class="faq-a">
+                            기존 시중 학원의 오답 노트가 틀린 문제를 오려 붙이거나 해설지를 보고 받아 적는 일회성 수동형 훈련이었다면, <strong>STEM 은 전산 오답 레이더 감지 방식입니다.</strong><br><br>
+                            학생이 마우스나 태블릿 펜으로 문제를 풀이해 나갈 때 각 풀이 분기점별로 머뭇거린 시간(Latency Time)과 연산 생략 흔적을 AI 알고리즘이 역추적합니다. 이를 통해 단순히 틀린 문제를 넘어 '풀었으나 수능 시험장에서 반드시 터질 시한폭탄 같은 구멍'까지 도출해 내어 3배수 난이도별 표적 변형 문제를 생성 지급합니다. 또한, 매주 역구술 화이트보드 테스트를 통과해야만 다음 단원으로 패스할 수 있는 완벽한 통제형 피드백 시스템을 구축하고 있습니다.
                         </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q" onclick="toggleFaq(this)">Q2. 중간에 반에 신규 합류하게 되면 기존 진도 공백 리스크는 어떻게 케어하나요? <span>▼</span></div>
-                            <div class="faq-a">
-                                커리큘럼이 이미 진행 중인 상태에서 진입하더라도 공백 리스크는 제로에 가깝습니다. 입학 즉시 STEM 자체 고안 AI 진단 평가 툴을 가동하여 학생의 선수 학습 상태를 낱낱이 파악합니다.<br><br>
-                                파악된 데이터 레이어를 기반으로 펑크가 난 핵심 개념에 대해서만 표적으로 발췌된 1:1 브릿지 VOD 강좌 및 주말 전임 연구원의 개인 맞춤형 오프라인 클리닉 지도 세션을 무상으로 밀착 연계합니다. 이를 통해 기존 정규반의 진도 속도에 단 2주 만에 안정적으로 연착륙하도록 설계되어 있습니다.
-                            </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q2. 중간에 반에 신규 합류하게 되면 기존 진도 공백 리스크는 어떻게 케어하나요? <span>▼</span></div>
+                        <div class="faq-a">
+                            커리큘럼이 이미 진행 중인 상태에서 진입하더라도 공백 리스크는 제로에 가깝습니다. 입학 즉시 STEM 자체 고안 AI 진단 평가 툴을 가동하여 학생의 선수 학습 상태를 낱낱이 파악합니다.<br><br>
+                            파악된 데이터 레이어를 기반으로 펑크가 난 핵심 개념에 대해서만 표적으로 발췌된 1:1 브릿지 VOD 강좌 및 주말 전임 연구원의 개인 맞춤형 오프라인 클리닉 지도 세션을 무상으로 밀착 연계합니다. 이를 통해 기존 정규반의 진도 속도에 단 2주 만에 안정적으로 연착륙하도록 설계되어 있습니다.
                         </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q" onclick="toggleFaq(this)">Q3. 학교 내신 성적이 약간 불리한 상황인데, 학종으로 의대나 SKY 합격이 정말 가능합니까? <span>▼</span></div>
-                            <div class="faq-a">
-                                <strong>충분히 가능하며, STEM이 가장 잘하는 영역입니다.</strong> 최근 대학 입시의 학생부종합전형 트렌드는 단순 내신 정량 등급의 나열을 넘어 '세부능력 및 특기사항(세특)'에 기재된 학업 역량의 정성적 깊이와 독창성입니다.<br><br>
-                                STEM 입시 데이터 전략팀은 학교 교과서 안에서 단순하게 배우고 넘어가는 기본 지식을 의학적, 컴퓨터 공학적, 혹은 경제학적 심화 주제 연구 논문 테마와 매끄럽게 연결해 냅니다. 학생만의 독보적인 탐구 활동 보고서를 작성할 수 있도록 1:1 정밀 가이드라인 바이블 포맷을 매달 설계 제공하기 때문에, 내신의 정량적 불리함을 세특의 압도적 퀄리티로 완벽하게 뒤집을 수 있습니다.
-                            </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q3. 학교 내신 성적이 약간 불리한 상황인데, 학종으로 의대나 SKY 합격이 정말 가능합니까? <span>▼</span></div>
+                        <div class="faq-a">
+                            <strong>충분히 가능하며, STEM이 가장 잘하는 영역입니다.</strong> 최근 대학 입시의 학생부종합전형 트렌드는 단순 내신 정량 등급의 나열을 넘어 '세부능력 및 특기사항(세특)'에 기재된 학업 역량의 정성적 깊이와 독창성입니다.<br><br>
+                            STEM 입시 데이터 전략팀은 학교 교과서 안에서 단순하게 배우고 넘어가는 기본 지식을 의학적, 컴퓨터 공학적, 혹은 경제학적 심화 주제 연구 논문 테마와 매끄럽게 연결해 냅니다. 학생만의 독보적인 탐구 활동 보고서를 작성할 수 있도록 1:1 정밀 가이드라인 바이블 포맷을 매달 설계 제공하기 때문에, 내신의 정량적 불리함을 세특의 압도적 퀄리티로 완벽하게 뒤집을 수 있습니다.
                         </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q" onclick="toggleFaq(this)">Q4. AI 오답 자동 생성 교재는 매주 제공되나요? 별도의 추가 청구 비용이 있는지 궁금합니다. <span>▼</span></div>
-                            <div class="faq-a">
-                                <strong>네, 매주 의무적으로 지급되며 추가 비용은 전혀 없습니다.</strong> 학생들은 매주 토요일 주간 모의평가를 치르게 되며, 완료 즉시 학생의 마킹 및 오답 레이어가 클라우드 서버로 실시간 전송됩니다.<br><br>
-                                AI 엔진이 오답의 원인을 유발한 수학적 개념 원리를 연쇄 추적하여, 오답 문항 본체는 물론이고 오답과 정확히 같은 메커니즘을 가진 대치동 킬러 변형 유사 문제를 3배수로 자동 매칭합니다. 이 데이터는 일요일 오전 등원 시 학생 한 명만을 위해 특수 표지 바인딩 처리된 실물 인쇄 교재인 'My-STEM 바이블 오답 레이더'로 제본되어 제공됩니다. 본원 정규 커리큘럼 수강생에게는 전액 기본 인프라로 무상 포함되어 있습니다.
-                            </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q4. AI 오답 자동 생성 교재는 매주 제공되나요? 별도의 추가 청구 비용이 있는지 궁금합니다. <span>▼</span></div>
+                        <div class="faq-a">
+                            <strong>네, 매주 의무적으로 지급되며 추가 비용은 전혀 없습니다.</strong> 학생들은 매주 토요일 주간 모의평가를 치르게 되며, 당일 저녁 21시 전산 마감과 동시에 개인별 약점 리포트북이 디지털 컴파일을 마칩니다. 일요일 등원 시 본인 전용 지정 사물함에 매주 프리미엄 특수 제본된 교재가 꽂히게 되며, 해당 비용은 전액 정규 반 수강료 레이어에 패키징 처리되어 있어 투명하게 운영됩니다.
                         </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q" onclick="toggleFaq(this)">Q5. 셔틀버스 운행 권역 및 안전한 등하원 출결 알림 서비스는 어떻게 운영되나요? <span>▼</span></div>
-                            <div class="faq-a">
-                                학부모님들의 안심 등하원을 위해 대치 본원을 기준으로 수인분당선 한티역, 대치사거리, 도곡동, 개포동 및 서초·반포 권역까지 커버하는 전용 스마트 안전 셔틀버스를 매 정규 수업 전후 타임마다 촘촘하게 운행하고 있습니다.<br><br>
-                                또한, 강의실 입구에 설치된 최첨단 AI 페이스 디바이스에 학생이 가볍게 눈길을 주면 안면 인식을 통해 입실 및 퇴실 정보가 기록됩니다. 기록된 실시간 타임스탬프 데이터는 즉시 학부모님의 카카오톡 알림톡 문자로 실시간 안심 전송되므로 배회나 무단 이탈 걱정 없이 자녀를 믿고 맡기실 수 있습니다.
-                            </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q5. 대치 본원 하이퍼 사옥의 등하원 출결 통제 방식과 셔틀버스 연동 기준은 무엇인가요? <span>▼</span></div>
+                        <div class="faq-a">
+                            STEM 은 한 치의 틈도 주지 않는 초밀착 생활 통제를 지향합니다. 사옥 입구에 설치된 최첨단 AI 페이스 디바이스에 학생이 가볍게 눈길을 주면 안면 인식을 통해 입실 및 퇴실 정보가 기록됩니다. 기록된 실시간 타임스탬프 데이터는 즉시 학부모님의 카카오톡 알림톡 문자로 실시간 안심 전송되므로 배회나 무단 이탈 걱정 없이 자녀를 믿고 맡기실 수 있습니다.
                         </div>
                     </div>
                 </div>
@@ -672,9 +685,9 @@
                     <h2 class="section-title">1:1 AI 인텔리전스 진단 및 프리미엄 입시 컨설팅 예약 신청서</h2>
                     <p class="section-subtitle">정확한 학생의 상태 파악과 고도화된 매칭을 위해 실질적인 학업 성취 지표를 선택 및 기입해 주시기 바랍니다.</p>
                 </div>
+
                 <div class="form-page-container">
                     <form id="stemConsultingForm">
-                        
                         <div class="form-section-title">1. 기본 인적 사항 및 연락처</div>
                         <div class="form-grid">
                             <div class="form-group">
@@ -701,40 +714,39 @@
                                 <label>연락처<span>*</span></label>
                                 <div class="phone-input-wrapper">
                                     <select id="phone_prefix" required>
-                                        <option value="">-- 선택 --</option>
                                         <option value="010">010</option>
+                                        <option value="011">011</option>
                                         <option value="02">02 (서울)</option>
                                         <option value="031">031 (경기)</option>
-                                        <option value="050">050 (안심번호)</option>
-                                        <option value="011">011</option>
                                     </select>
-                                    <input type="text" id="phone_number" required placeholder="숫자만 입력 (예: 12345678)" maxlength="9">
+                                    <span>-</span>
+                                    <input type="tel" id="phone_number" required placeholder="예: 1234-5678" oninput="autoHyphen(this)" maxlength="9">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-section-title" style="margin-top: 1.5rem;">2. 현재 학업 데이터 리포트</div>
+                        <div class="form-section-title" style="margin-top: 3rem;">2. 학업 성취 분석 데이터 입력 레이어</div>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>주요 모의고사/내신 평균 등급<span>*</span></label>
+                                <label>현재 학생의 모의고사/내신 수학 평균 등급 레벨<span>*</span></label>
                                 <select id="student_grade_level" required>
                                     <option value="">-- 선택해주세요 --</option>
-                                    <option value="의치한 수석권 (1.00 ~ 1.20)">의치한 수석권 (내신/모평 1.00 ~ 1.20)</option>
-                                    <option value="최상위권 (1등급 대)">최상위권 (안정적 고정 1등급 대)</option>
-                                    <option value="상위권 (2등급 대)">상위권 (안착 및 등급 도약 필요한 2등급 대)</option>
-                                    <option value="중위권 (3등급 이하)">중위권 이하 (개념 및 논리 기하 재정비 필요)</option>
+                                    <option value="전교 극최상위 (의치한 수석 타겟)">전교 극최상위 (의치한 수석 타겟)</option>
+                                    <option value="안정적 1등급 (SKY 합격선)">안정적 1등급 (SKY 합격선)</option>
+                                    <option value="치열한 2등급 (인서울 상위권 분기점)">치열한 2등급 (인서울 상위권 분기점)</option>
+                                    <option value="만성적 3~4등급 이하 (약점 원인 추적 긴급요망)">만성적 3~4등급 이하 (약점 원인 추적 긴급요망)</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>가장 시급한 희망 집중 코스 선택 (7대 정규 라인업)<span>*</span></label>
+                                <label>최우선 상담 희망 타겟 커리큘럼 코스 선택<span>*</span></label>
                                 <select id="target_subject" required>
                                     <option value="">-- 선택해주세요 --</option>
-                                    <option value="[01번] 중등 수학 기하·대수 직관 완성 코스">[01번] 중등 수학 기하·대수 직관 완성 코스</option>
-                                    <option value="[02번] 고등 수학 공통과정 킬러 격파반">[02번] 고등 수학 공통과정 킬러 격파반</option>
+                                    <option value="[01번] 중등 수학 기하·대수 하이퍼 속진반">[01번] 중등 수학 기하·대수 하이퍼 속진반</option>
+                                    <option value="[02번] 고등 수학Ⅰ·Ⅱ 대치동 내신 최고점 전략반">[02번] 고등 수학Ⅰ·Ⅱ 대치동 내신 최고점 전략반</option>
                                     <option value="[03번] 미적분·기하 선택과정 초밀착 심화반">[03번] 미적분·기하 선택과정 초밀착 심화반</option>
-                                    <option value="[04번] AI 연동 1:1 초개인화 테크니컬 오답 클리닉">[04번] AI 연동 1:1 초개인화 테크니컬 오답 클리닉</option>
-                                    <option value="[05번] 수능 영어 빈칸·순서 로지컬 싱킹 마스터">[05번] 수능 영어 빈칸·순서 로지컬 싱킹 마스터</option>
-                                    <option value="[06번] 프리미엄 메디컬·SKY 학생부 종합 매이킹">[06번] 프리미엄 메디컬·SKY 학생부 종합 매이킹</option>
+                                    <option value="[04번] AI 연동 1:1 초개인화 오답 클리닉">[04번] AI 연동 1:1 초개인화 오답 클리닉</option>
+                                    <option value="[05번] 의학계열 지능형 MMI 면접 & 수리논술 마스터">[05번] 의학계열 지능형 MMI 면접 & 수리논술 마스터</option>
+                                    <option value="[06번] 프리미엄 메디컬·SKY 학생부 종합 메이킹">[06번] 프리미엄 메디컬·SKY 학생부 종합 메이킹</option>
                                     <option value="[07번] N수 수능 최상위권 전과목 하이퍼 파이널">[07번] N수 수능 최상위권 전과목 하이퍼 파이널</option>
                                 </select>
                             </div>
@@ -757,14 +769,11 @@
                         </div>
 
                         <div class="checkbox-agreement-box">
-                            <input type="checkbox" id="privacy_agree" required>
-                            <label for="privacy_agree">
-                                [필수] 개인정보 수집 및 제3자 제공 동의에 동의합니다.<br>
-                                수집된 정보는 STEM 프리미엄 입시 테스트 배치 및 매칭 상담 안내 외의 용도로 일절 무단 배포 및 상업적 악용이 되지 않음을 보장합니다.
-                            </label>
+                            <input type="checkbox" id="personal_inf_agree" required>
+                            <label for="personal_inf_agree">STEM 초밀착 고밀도 프리미엄 상담 및 실시간 모의 진단 평가 집행을 위한 개인정보 수집·이용 동의 지침 리포트를 확인했으며 이에 격렬히 동의합니다. (필수)</label>
                         </div>
 
-                        <button type="submit" class="btn-submit-direct">제출하기</button>
+                        <button type="submit" id="submitFormBtn" class="btn-submit-direct">제출하기 ➔</button>
                     </form>
                 </div>
             </div>
@@ -774,71 +783,25 @@
     <footer>
         <div class="footer-inner">
             <div>
-                <p style="font-weight:900; color:white; font-size:1.1rem; margin-bottom:0.5rem;">(주)에듀테크 글로벌 교육 매니지먼트 STEM</p>
-                <p>서울특별시 강남구 대치동 입시 테크빌딩 사옥 전체 | 대표이사: 홍길동</p>
-                <p>사업자등록번호: 000-00-00000 | 유선 대표 센터: 1544-0000</p>
+                <p style="font-weight: 900; font-size: 1.2rem; color: var(--white); margin-bottom: 0.5rem;">STEM 입시 매니지먼트 플랫폼</p>
+                <p>서울특별시 강남구 대치동 스마트 하이퍼 전용 사옥 1~5층 통합 통합관제센터</p>
+                <p>대표이사: 에듀테크 하이브리드 연합회원 | 사업자등록번호: 220-88-XXXXX</p>
             </div>
-            <div style="display:flex; gap:2rem;"><a onclick="navigateTo('about')" style="color:white; cursor:pointer;">이용약관</a><a onclick="navigateTo('apply')" style="color:var(--accent); cursor:pointer;">개인정보처리방침</a></div>
+            <div>
+                <p>© 2026 STEM Inc. All Rights Reserved. Powered by High-End AI Diagnostics.</p>
+            </div>
         </div>
-        <div style="text-align:center; margin-top:2rem; border-top:1px solid #334155; padding-top:1.5rem; color:#64748B; font-size:0.8rem;">Copyright © 2026 STEM Co., Ltd. All Rights Reserved.</div>
     </footer>
 
     <script>
         const cafeDatabase = [
-            { 
-                id: 6, 
-                isNotice: true, 
-                title: "[학사공지] 2026 하이퍼 여름 올인원 몰입 집중 캠프 전체 시간표 가이드라인 최종 공고", 
-                writer: "학사총괄부", 
-                date: "2026.06.10", 
-                body: "안녕하세요. STEM 학사총괄부입니다. 재원생 학부모님들의 지속적인 요청과 대치동 입시 연구소의 트렌드 회의를 거쳐 확정된 '7월 11일 대개강 여름 몰입 캠프' 등원 최종 지침서입니다.<br><br>캠프 기간 동안 모든 학생은 매일 오전 8시 40분까지 전용 독서실 지정좌석에 착석해야 하며, 등원과 동시에 개인 스마트기기는 관제실에 의무 제출 수거 처리되는 것이 엄격한 원칙입니다. 일일 의무 자습은 밤 22시 정각에 해제되며, 매일 치러지는 데일리 백지 테스트 미통과 자는 일요일 오전 긴급 스크럼 클리닉 반에 자동 소집 통보됩니다. 한 치의 오차 없는 완벽한 관리를 집행하겠습니다.", 
-                comments: [{ id: 1, writer: "고3최강", date: "2026.06.10 21:30", content: "아이의 느슨해진 마음을 빡세게 락인해 주셔서 진심으로 감사합니다. 이번 방학 믿고 전적으로 맡깁니다." }] 
-            },
-            { 
-                id: 5, 
-                isNotice: true, 
-                title: "[자료배포] 6월 고3 평가원 모의평가 변형 연계 예측 오답률 1위 수리 22번 문항 구조 분석 가이드북", 
-                writer: "입시전략팀", 
-                date: "2026.06.05", 
-                body: "이번 6월 평가원 모의평가 수리 영역에서 전국 오답률 78.4%를 기록하며 등급컷 변동의 핵심 축이 된 공통과정 다항함수 최고난도 문항에 대해 출제자가 교묘하게 숨겨놓은 3가지 대칭적 숨은 조건을 해체해 드립니다.<br><br>단순 계산 노가다식 해설지 풀이를 버리고, 도함수의 그래프가 가질 수 있는 한계 스케일 값을 통해 30초 만에 개형을 유추해 내는 대치 본원 시크릿 회로 기법을 탑재했습니다. 재원생은 태블릿 앱을 통해 전용 PDF 분석서가 자동 배포 완료되었으니 반드시 오답 레이더 제본 교재와 연동 학습하시기 바랍니다.", 
-                comments: [] 
-            },
-            { 
-                id: 4, 
-                isNotice: false, 
-                title: "[수학센터] 고2 내신 기말고사 대비 강남·서초권 24개 고교 출제 매커니즘 족보 예측실 오픈", 
-                writer: "수학연구팀", 
-                date: "2026.06.01", 
-                body: "다가오는 고2 1학기 기말고사 수학 영역 만점을 위해 강남 대치동 및 서초·송파권 주요 24개 핵심 고교의 최근 3개년 부교재 변형 이력과 기출 오답 매커니즘 분석을 완료했습니다.<br><br>단 한 문항의 서술형 조건 변형도 놓치지 않고 꼼꼼하게 감점 요인을 소거할 수 있도록 설계된 학교별 핀포인트 적중 모의 트레이닝 모듈을 오늘 저녁부터 정식 가동합니다. 재원생들은 하차 후 즉시 클리닉실을 방문해 개별 봉투에 담긴 전용 인쇄본을 즉시 수령하시기 바랍니다.", 
-                comments: [] 
-            },
-            { 
-                id: 3, 
-                isNotice: false, 
-                title: "[영어센터] 빈칸추론 매력적 오답 소거 논리 법칙 주간 시크릿 프린트 4호 등록 안내", 
-                writer: "영어연구원", 
-                date: "2026.05.28", 
-                body: "EBS 직접 연계 정책의 완전한 폐지와 절벽 트렌드에 완벽하게 대응하기 위해, 시험장에서 만나는 완전히 낯선 외부 최고난도 지문에서 완벽하고 빠르게 문장 간의 인과관계(Cause & Effect)를 도식화해 내는 주간 시크릿 프린트 4호가 배포되었습니다.<br><br>평가원 출제 위원들이 오답 선지를 매력적으로 구성하기 위해 사용하는 주어 단어 바꿔치기, 역관계 유도 등 정밀 매커니즘 수록집입니다. 파일 탭에서 개별 다운로드를 즉시 실행하세요.", 
-                comments: [] 
-            },
-            { 
-                id: 2, 
-                isNotice: false, 
-                title: "[의대컨설팅] 메디컬 학종 합격을 위한 생기부 탐구주제 심화 보고서 발제 레이아웃집", 
-                writer: "데이터연구실", 
-                date: "2026.05.25", 
-                body: "고등학교 생활기록부의 꽃인 세부능력 및 특기사항에 기재할 심화 보고서 발제 레이아웃입니다. 생명과학Ⅱ 속 유전자 가위 기술과 확률과 통계 교과 내 베이즈 정리 알고리즘을 유기적으로 결합하여 나만의 진단 시스템 설계를 논증해내는 고도화된 탐구 예시안입니다.<br><br>해당 가이드라인 포맷을 적용하여 학교 수행평가 제출 희망 학생은 입시 데이터 전략팀에 선착순 1:1 대면 피드백 상담을 신청해 주시기 바랍니다. 인원 충족 시 조기 마감됩니다.", 
-                comments: [] 
-            },
-            { 
-                id: 1, 
-                isNotice: false, 
-                title: "[안내사항] 대치 본원 스마트 전용 하이퍼 사옥 주차 및 셔틀버스 주간 노선표 개편 안내", 
-                writer: "행정지원팀", 
-                date: "2026.05.20", 
-                body: "본원 스마트 하이퍼 전용 신사옥 확장 이전에 따라 수인분당선 한티역 거점을 중심으로 순환 배치되는 전용 등하원 셔틀버스의 추가 노선 편성과 주차 안내 매뉴얼입니다.<br><br>아울러 등원 시 로비에 배치된 스마트 페이스 인지 출결 디바이스의 학생별 등록 수칙 및 지각 자 통제 기준이 개편되었으니, 발송해 드린 카카오톡 학부모 안내 링크 리포트의 시각 스탬프 기준을 꼭 대조 확인해 보시기 바랍니다. 대치 본원은 안전을 최우선으로 통제합니다.", 
-                comments: [] 
-            }
+            { id: 7, isNotice: true, title: "[필독] 2027학년도 메디컬 증원 패러다임 변화에 따른 STEM 고3 수시 아키텍처 가이드라인", writer: "입시전략팀", date: "2026.06.10", body: "2027학년도 의과대학 배정 정원 변화 확정 발표안에 따른 대치동 최상위권 수시 지원 배치 스케일링 가이드라인북입니다.<br><br> 전형별 정량 내신 등급의 미세 균열을 세부능력 및 특기사항(세특)의 수리적 직관 깊이로 완전히 메워버리는 역발상 스크럼 배치표가 본원 통합 관제실 서버에 탑재 완료되었습니다. 재원생 학부모님께서는 담당 수석 매니저와의 1:1 대면 세션 일정을 주간 예약 시스템을 통해 선점해 주시기 바랍니다.", comments: [] },
+            { id: 6, isNotice: true, title: "[생활통제] 여름방학 하이브리드 올인원 몰입 캠프 스마트 디바이스 전면 통제 및 등원 수칙", writer: "행정지원팀", date: "2026.06.08", body: "오는 7월 전개되는 하이브리드 올인원 몰입 캠프 입과생은 등원 즉시 개인 태블릿과 스마트폰을 본원 전산 보관 락커에 의무 입고해야 합니다.<br><br>인터넷 강의 사이트 외 불필요한 연계 트래픽은 원내 방화벽 엔진에 의해 24시간 실시간 차단 모니터링되며, 일일 의무 자습은 밤 22시 정각에 해제되며, 매일 치러지는 데일리 백지 테스트 미통과 자는 일요일 오전 긴급 스크럼 클리닉 반에 자동 소집 통보됩니다. 한 치의 오차 없는 완벽한 관리를 집행하겠습니다.", comments: [{ id: 1, writer: "고3최강", date: "2026.06.10 21:30", content: "아이의 느슨해진 마음을 빡세게 락인해 주셔서 진심으로 감사합니다. 이번 방학 믿고 전적으로 맡깁니다." }] },
+            { id: 5, isNotice: true, title: "[자료배포] 6월 고3 평가원 모의평가 변형 연계 예측 오답률 1위 수리 22번 문항 구조 분석 가이드북", writer: "입시전략팀", date: "2026.06.05", body: "이번 6월 평가원 모의평가 수리 영역에서 전국 오답률 78.4%를 기록하며 등급컷 변동의 핵심 축이 된 공통과정 다항함수 최고난도 문항에 대해 출제자가 교묘하게 숨겨놓은 3가지 대칭적 숨은 조건을 해체해 드립니다.<br><br>단순 계산 노가다식 해설지 풀이를 버리고, 도함수의 그래프가 가질 수 있는 한계 스케일 값을 통해 30초 만에 개형을 유추해 내는 대치 본원 시크릿 회로 기법을 탑재했습니다. 재원생은 태블릿 앱을 통해 전용 PDF 분석서가 자동 배포 완료되었으니 반드시 오답 레이더 제본 교재와 연동 학습하시기 바랍니다.", comments: [] },
+            { id: 4, isNotice: false, title: "[수학센터] 고2 내신 기말고사 대비 강남·서초권 24개 고교 출제 매커니즘 족보 예측실 오픈", writer: "수학연구팀", date: "2026.06.01", body: "다가오는 고2 1학기 기말고사 수학 영역 만점을 위해 강남 대치동 및 서초·송파권 주요 24개 핵심 고교의 최근 3개년 부교재 변형 이력과 기출 오답 매커니즘 분석을 완료했습니다.<br><br>단 한 문항의 서술형 조건 변형도 놓치지 않고 꼼꼼하게 감점 요소를 도려낸 완벽 정복 모의 팩 5세트가 금일 마스터 트랙반 지정 좌석에 지급되었습니다. 스스로 생각의 회로를 점검하는 리드 타임 체크시트를 반드시 작성하세요.", comments: [] },
+            { id: 3, isNotice: false, title: "[MMI센터] 서울대 의대 및 연세대 활동우수형 다중미니면접 시뮬레이션 문항 리스트업", writer: "면접연구회", date: "2026.05.28", body: "최근 강화 추세인 의학계열 인성 및 상황 면접에 완벽히 정사하기 위해 설계된 MMI 특수 실전 압박 테마 12종입니다. 환자의 알 권리와 의료 재화의 유한성 분배 마찰 시나리오 속에서 지원자가 취해야 할 가치 매트릭스 답변 공식이 포함되어 있습니다. 실전 녹화 테스트 피드백 스케줄은 수요일 야간 타임 순차 배정입니다.", comments: [] },
+            { id: 2, isNotice: false, title: "[생기부인프라] 고등학교 생명과학Ⅱ 세특 연계 확률과통계 결합형 탐구 보고서 예시 포맷 배포", writer: "입시전략팀", date: "2026.05.25", body: "일반고 내신 1등급 중반대 학생이 메디컬 카드를 안정적으로 던지기 위한 교과 심화 보고서 발제 레이아웃입니다. 생명과학Ⅱ 속 유전자 가위 기술과 확률과 통계 교과 내 베이즈 정리 알고리즘을 유기적으로 결합하여 나만의 진단 시스템 설계를 논증해내는 고도화된 탐구 예시안입니다.<br><br>해당 가이드라인 포맷을 적용하여 학교 수행평가 제출 희망 학생은 입시 데이터 전략팀에 선착순 1:1 대면 피드백 상담을 신청해 주시기 바랍니다. 인원 충족 시 조기 마감됩니다.", comments: [] },
+            { id: 1, isNotice: false, title: "[안내사항] 대치 본원 스마트 전용 하이퍼 사옥 주차 및 셔틀버스 주간 노선표 개편 안내", writer: "행정지원팀", date: "2026.05.20", body: "본원 스마트 하이퍼 전용 신사옥 확장 이전에 따라 수인분당선 한티역 거점을 중심으로 순환 배치되는 전용 등하원 셔틀버스의 추가 노선 편성과 주차 안내 매뉴얼입니다.<br><br>아울러 등원 시 로비에 배치된 스마트 페이스 인지 출결 디바이스의 학생별 등록 수칙 및 지각 자 통제 기준이 개편되었으니, 발송해 드린 카카오톡 학부모 안내 링크 리포트의 시각 스탬프 기준을 꼭 대조 확인해 보시기 바랍니다. 대치 본원은 안전을 최우선으로 통제합니다.", comments: [] }
         ];
 
         let activeArticleId = null;
@@ -847,11 +810,10 @@
         function navigateTo(pageId, targetSectionId = null) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
-            
+
             const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) { 
-                targetPage.classList.add('active'); 
-                
+            if (targetPage) {
+                targetPage.classList.add('active');
                 if (targetSectionId) {
                     setTimeout(() => {
                         const section = document.getElementById('target-' + targetSectionId);
@@ -860,58 +822,70 @@
                         }
                     }, 80);
                 } else {
-                    window.scrollTo({top:0, behavior:'smooth'}); 
+                    window.scrollTo({top:0, behavior:'smooth'});
                 }
             }
-            
+
             const link = document.getElementById('nav-' + pageId);
             if (link) link.classList.add('active');
 
-            if (pageId === 'notices') { closeArticle(); renderCafeList(); }
+            if(pageId === 'notices') {
+                backToCafeList();
+            }
         }
 
         function renderCafeList() {
             const tbody = document.getElementById('cafe-post-tbody');
-            if(!tbody) return;
             tbody.innerHTML = '';
             cafeDatabase.forEach(post => {
                 const tr = document.createElement('tr');
+                const badge = post.isNotice ? `<span class="cafe-badge-notice">공지</span>` : '';
+                const cCount = post.comments.length > 0 ? `<span class="comment-count-badge">[${post.comments.length}]</span>` : '';
+                
                 tr.innerHTML = `
-                    <td>${post.isNotice ? '<span class="cafe-badge-notice">공지</span>' : post.id}</td>
-                    <td class="cafe-title-td" onclick="openArticle(${post.id})">${post.title} <span class="comment-count-badge">[${post.comments.length}]</span></td>
-                    <td style="color:#555;">${post.writer}</td>
-                    <td style="color:#888;">${post.date}</td>
+                    <td>${post.isNotice ? '🔥' : post.id}</td>
+                    <td class="cafe-title-td" onclick="viewCafeArticle(${post.id})">${badge} ${post.title} ${cCount}</td>
+                    <td>${post.writer}</td>
+                    <td>${post.date}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function openArticle(id) {
+        function viewCafeArticle(id) {
             activeArticleId = id;
             const post = cafeDatabase.find(p => p.id === id);
-            if (!post) return;
+            if(!post) return;
+
             document.getElementById('cafe-list-view').style.display = 'none';
             document.getElementById('cafe-detail-view').style.display = 'block';
-            document.getElementById('detail-title').innerText = post.title;
-            document.getElementById('detail-writer').innerText = post.writer;
-            document.getElementById('detail-date').innerText = post.date;
-            document.getElementById('detail-body').innerHTML = post.body;
+
+            const renderTarget = document.getElementById('cafe-detail-render-target');
+            renderTarget.innerHTML = `
+                <div class="cafe-article-header">
+                    <span style="color:var(--cafe-main); font-weight:800; font-size:0.9rem;">📢 STEM 멤버십 공식 데이터 소통망</span>
+                    <h3 style="font-size:1.6rem; font-weight:900; margin-top:0.5rem; color:#222; line-height:1.4;">${post.title}</h3>
+                    <div style="margin-top:0.8rem; font-size:0.9rem; color:var(--text-muted);">
+                        <span>작성자: <strong>${post.writer}</strong></span> | <span>등록일: ${post.date}</span>
+                    </div>
+                </div>
+                <div class="cafe-article-body">${post.body}</div>
+            `;
             renderComments(post);
         }
 
-        function closeArticle() {
+        function backToCafeList() {
             activeArticleId = null;
-            document.getElementById('cafe-list-view').style.display = 'block';
             document.getElementById('cafe-detail-view').style.display = 'none';
+            document.getElementById('cafe-list-view').style.display = 'block';
             renderCafeList();
         }
 
         function renderComments(post) {
-            const listUl = document.getElementById('article-comment-list');
-            document.getElementById('comment-count').innerText = post.comments.length;
+            const listUl = document.getElementById('cafe-comment-render-target');
             listUl.innerHTML = '';
-            if(post.comments.length === 0){
-                listUl.innerHTML = `<li style="color:var(--text-muted); text-align:center; padding:1.5rem 0;">등록된 첫 댓글이 없습니다. 소중한 피드백을 남겨보세요.</li>`;
+            if(post.comments.length === 0) {
+                listUl.innerHTML = `<li style="color:var(--text-muted); font-size:0.9rem; padding:1rem 0;">등록된 실시간 스크럼 댓글이 없습니다. 첫 피드백을 기록해 보세요.</li>`;
                 return;
             }
             post.comments.forEach(c => {
@@ -931,42 +905,51 @@
             const post = cafeDatabase.find(p => p.id === activeArticleId);
             const nick = document.getElementById('comment-nickname').value.trim();
             const text = document.getElementById('comment-content').value.trim();
-            if(!nick || !text) { alert("닉네임과 본문을 빠짐없이 입력하세요."); return; }
+
+            if(!nick || !text) {
+                alert("닉네임과 본문을 빠짐없이 입력하세요.");
+                return;
+            }
 
             const now = new Date();
             const formattedDate = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-            const nextId = post.comments.length > 0 ? Math.max(...post.comments.map(c => c.id)) + 1 : 1;
-
-            post.comments.push({ id: nextId, writer: nick, date: formattedDate, content: text });
+            
+            const newId = post.comments.length > 0 ? Math.max(...post.comments.map(c=>c.id)) + 1 : 1;
+            post.comments.push({ id: newId, writer: nick, date: formattedDate, content: text });
+            
+            document.getElementById('comment-nickname').value = '';
             document.getElementById('comment-content').value = '';
             renderComments(post);
         }
 
-        function deleteComment(postId, cId) {
+        function deleteComment(postId, commentId) {
             const post = cafeDatabase.find(p => p.id === postId);
-            if(post) { post.comments = post.comments.filter(c => c.id !== cId); renderComments(post); }
+            if(!post) return;
+            post.comments = post.comments.filter(c => c.id !== commentId);
+            renderComments(post);
         }
 
-        function toggleFaq(el) {
-            const a = el.nextElementSibling;
-            const s = el.querySelector('span');
-            if (a.style.display === 'block') { a.style.display = 'none'; s.innerText = '▼'; }
-            else { a.style.display = 'block'; s.innerText = '▲'; }
+        function toggleFaq(element) {
+            const ans = element.nextElementSibling;
+            const span = element.querySelector('span');
+            if(ans.style.display === 'block') {
+                ans.style.display = 'none';
+                span.innerText = '▼';
+            } else {
+                ans.style.display = 'block';
+                span.innerText = '▲';
+            }
         }
 
-        document.getElementById('phone_number').addEventListener('input', function(e) {
-            let v = e.target.value.replace(/[^0-9]/g, '');
-            if (v.length > 4) v = v.substring(0,4) + "-" + v.substring(4,8);
-            e.target.value = v;
-        });
+        window.onload = function() {
+            renderCafeList();
+        };
 
-        renderCafeList();
-
-        // 스프레드시트 웹 앱 연동 스크립트 트리거
+        // 컨설팅 서브밋 핸들러
         document.getElementById('stemConsultingForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.innerText = "제출중입니다";
+            const btn = document.getElementById('submitFormBtn');
+            btn.innerText = "제출 중...";
             btn.disabled = true;
 
             // [주의] 하단 가이드라인 3단계를 수행한 뒤 획득한 배포 URL을 이곳에 교체해 넣으세요.
@@ -990,10 +973,23 @@
             })
             .catch(() => alert("오류가 발생했습니다."))
             .finally(() => { 
-                btn.innerText = "제출하기"; 
+                btn.innerText = "제출하기 ➔"; 
                 btn.disabled = false; 
             });
         });
+
+        function autoHyphen(target) {
+            // 숫자 제외한 모든 문자 제거
+            let num = target.value.replace(/[^0-9]/g, '');
+
+            // 7자리 또는 8자리 숫자가 들어올 때 유기적으로 하이픈 위치 조절
+            if (num.length <= 4) {
+                target.value = num;
+            } else {
+                target.value = num.substring(0, num.length - 4) + '-' + num.substring(num.length - 4);
+            }
+        }
+
     </script>
 </body>
 </html>
