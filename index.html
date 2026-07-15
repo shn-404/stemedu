@@ -327,6 +327,22 @@
                 height: 32px; 
             }
         }
+
+        /* 사이트 내 모든 이미지의 드래그 및 선택을 방지 */
+        img {
+            -webkit-user-drag: none;          /* 사파리/크롬 드래그 방지 */
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+    
+            -webkit-touch-callout: none;      /* 모바일에서 길게 눌렀을 때 저장 메뉴 뜨는 것 방지 */
+            user-select: none;                /* 텍스트/이미지 선택 방지 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
     </style>
 </head>
 <body>
@@ -1113,6 +1129,35 @@
                 btn.disabled = false; 
             });
         });
+
+        // 1. 마우스 우클릭 방지
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 2. 이미지 드래그 방지
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        // 3. 주요 복사 및 소스 보기 단축키 방지 (Ctrl+S, Ctrl+C, Ctrl+U, F12)
+        document.addEventListener('keydown', function(e) {
+            // F12 방지
+            if (e.keyCode === 123) {
+                e.preventDefault();
+            }
+            // Ctrl+Shift+I (개발자 도구) 방지
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+            }
+            // Ctrl+S (페이지 저장), Ctrl+C (복사), Ctrl+U (소스 보기) 방지
+            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 67 || e.keyCode === 85)) {
+                e.preventDefault();
+            }
+        });
+        
     </script>
 </body>
 </html>
