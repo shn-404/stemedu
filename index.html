@@ -31,8 +31,16 @@
             border-bottom: 1px solid var(--border); z-index: 2000;
         }
         .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 80px; position: relative; }
-        .logo { font-size: 2rem; font-weight: 900; color: var(--primary); letter-spacing: -1.5px; cursor: pointer; }
-        .logo span { color: var(--accent); }
+        .logo { 
+            cursor: pointer; 
+            display    : flex; 
+            align-items: center; 
+        }
+        .logo img {
+            height: 40px; /* 헤더 높이(80px)에 맞춰 적절한 크기로 제한 (원하는 크기로 변경 가능) */
+            width: auto;  /* 비율 유지 */
+            display: block;
+        }
         
         nav { height: 100%; }
         nav > ul { display: flex; list-style: none; gap: 0.5rem; height: 100%; align-items: center; }
@@ -313,6 +321,11 @@
             /* 푸터 레이아웃 */
             footer { padding: 2.5rem 1.2rem; font-size: 0.85rem; }
             .footer-inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+
+            /* 모바일 헤더 높이에 맞게 살짝 작게 조절 */
+            .logo img {
+                height: 32px; 
+            }
         }
     </style>
 </head>
@@ -326,7 +339,9 @@
                 <span></span>
             </button>
 
-            <div onclick="navigateTo('home')" class="logo">STEM<span>.</span></div>
+            <div onclick="navigateTo('home')" class="logo">
+                <img src="2.png" alt="STEM 로고">
+            </div>
             
             <nav>
                 <ul>
