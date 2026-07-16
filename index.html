@@ -7,357 +7,478 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {
-            --primary: #0F172A;
-            --secondary: #1E293B;
-            --accent: #6FB3F8;        /* 프리미엄 파스텔 블루 */
-            --accent-hover: #529EE2;  /* 마우스 호버용 딥 블루 */
+            /* 신뢰감을 주는 럭셔리 네이비 & 하이테크 블루 베이스 */
+            --primary: #0A1128;       /* 메인 다크 */
+            --primary-light: #1C2541; /* 미디엄 네이비 */
+            --accent: #3A86FF;        /* 에듀테크 하이테크 블루 */
+            --accent-hover: #0056E0;  
+            --accent-glow: rgba(58, 134, 255, 0.15);
             --text-main: #1E293B;     
             --text-muted: #64748B;    
             --bg-light: #F8FAFC;      
             --white: #FFFFFF;
             --border: #E2E8F0;
-            --card-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-hover: #CBD5E1;
+            --premium-shadow: 0 12px 40px -10px rgba(10, 17, 40, 0.05);
+            --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* 부드럽고 세련된 전환 감속 */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard Variable", Pretendard, sans-serif; }
-        body { background-color: var(--white); color: var(--text-main); line-height: 1.7; letter-spacing: -0.3px; overflow-x: hidden; }
+        body { background-color: var(--white); color: var(--text-main); line-height: 1.6; letter-spacing: -0.4px; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* GNB 구조 */
+        /* GNB - 정제된 미니멀 보더 & 하이엔드 글래스모피즘 */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background-color: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border); z-index: 2000;
+            background-color: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5); z-index: 2000;
+            transition: var(--transition-smooth);
+        }
+        header.scrolled {
+            box-shadow: 0 8px 30px rgba(10, 17, 40, 0.03);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom-color: rgba(226, 232, 240, 0.8);
         }
         .nav-container { 
-            max-width: 1440px; 
-            margin: 0 auto; 
-            padding: 0 2rem; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            height: 80px; 
-            position: relative; 
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem; 
+            display: flex; justify-content: space-between; align-items: center; 
+            height: 80px; position: relative; 
         }
         .logo { 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            font-weight: 900;
-            font-size: 1.6rem;
-            color: var(--primary);
-            text-decoration: none;
+            cursor: pointer; display: flex; align-items: center; 
+            font-weight: 800; font-size: 1.4rem; color: var(--primary);
+            text-decoration: none; transition: var(--transition-smooth);
         }
-        .logo span { color: var(--accent); }
+        .logo:hover { opacity: 0.85; }
+        .logo img { max-height: 38px; height: auto; }
         
         nav { height: 100%; }
-        nav > ul { display: flex; list-style: none; gap: 0.5rem; height: 100%; align-items: center; }
+        nav > ul { display: flex; list-style: none; gap: 0.25rem; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; }
         
-        nav > ul > li > a { font-size: 1.05rem; font-weight: 700; color: var(--text-main); padding: 0 1.2rem; cursor: pointer; height: 100%; display: flex; align-items: center; text-decoration: none; transition: var(--transition); }
-        nav > ul > li:hover > a, nav > ul > li > a.active { color: var(--accent); }
-        
-        /* 드롭다운 메뉴 */
-        .dropdown-menu {
-            position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
-            background: var(--white); border: 1px solid var(--border); border-radius: 0 0 12px 12px;
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08); width: 240px; display: none; list-style: none; padding: 0.8rem 0; z-index: 2100;
+        nav > ul > li > a { 
+            font-size: 0.95rem; font-weight: 600; color: #334155; 
+            padding: 0.5rem 1.1rem; border-radius: 8px; cursor: pointer;
+            text-decoration: none; transition: var(--transition-smooth);
         }
-        .dropdown-menu li { width: 100%; height: auto; display: block; }
-        .dropdown-menu li a { padding: 0.7rem 1.5rem; font-size: 0.95rem; color: var(--text-main); text-decoration: none; display: block; font-weight: 600; transition: var(--transition); cursor: pointer; text-align: left; }
-        .dropdown-menu li a:hover { background-color: var(--bg-light); color: var(--accent); padding-left: 1.8rem; }
-        nav > ul > li:hover .dropdown-menu { display: block; }
-
+        nav > ul > li:hover > a, nav > ul > li > a.active { 
+            background-color: rgba(58, 134, 255, 0.06); color: var(--accent);
+        }
+        
+        /* 메인 CTA - 컴팩트하고 신뢰감 높은 각진 엣지 버튼 */
         .cta-btn-fixed {
-            background-color: var(--primary); color: var(--white); padding: 0.8rem 1.6rem; border-radius: 8px;
-            font-weight: 800; font-size: 0.95rem; transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer; box-shadow: 0 4px 12px rgba(10, 25, 49, 0.1);
+            background: var(--primary); color: var(--white); padding: 0.7rem 1.4rem; border-radius: 8px;
+            font-weight: 700; font-size: 0.9rem; transition: var(--transition-smooth); border: none;
+            cursor: pointer; box-shadow: 0 4px 12px rgba(10, 17, 40, 0.08);
         }
-        .cta-btn-fixed:hover { background-color: var(--accent); color: var(--primary); transform: translateY(-2px); }
+        .cta-btn-fixed:hover { 
+            background: var(--accent); color: var(--white); 
+            box-shadow: 0 8px 20px var(--accent-glow); transform: translateY(-2px); 
+        }
 
-        /* 모바일 햄버거 버튼 & 사이드 바 */
-        .mobile-menu-toggle { 
-            display: none; 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            padding: 0.5rem; 
-            z-index: 3000; 
-        }
-        .mobile-menu-toggle span { 
-            display: block; 
-            width: 22px; 
-            height: 2px; 
-            background: var(--primary); 
-            margin: 5px 0; 
-            transition: var(--transition); 
-        }
-        
+        /* 모바일 네비게이션 */
+        .mobile-menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 3000; }
+        .mobile-menu-toggle span { display: block; width: 22px; height: 1.5px; background: var(--primary); margin: 5px 0; transition: var(--transition-smooth); }
         .mobile-menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
         .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
-        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -5px); }
+        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-4px, -4px); }
 
         .mobile-sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
             background: var(--white); border-right: 1px solid var(--border);
-            box-shadow: 10px 0 30px rgba(0,0,0,0.05); z-index: 2500; transition: var(--transition);
-            padding: 90px 1.5rem 2rem 1.5rem; overflow-y: auto;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.03); z-index: 2500; transition: var(--transition-smooth);
+            padding: 100px 1.5rem 1.5rem 1.5rem; overflow-y: auto;
         }
         .mobile-sidebar.open { left: 0; }
         .mobile-sidebar-backdrop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); z-index: 2400; display: none; backdrop-filter: blur(3px);
+            background: rgba(10, 17, 40, 0.2); z-index: 2400; display: none; backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
-
         .mobile-nav-list { list-style: none; }
-        .mobile-nav-item { border-bottom: 1px solid #F1F5F9; padding: 0.8rem 0; }
-        .mobile-nav-item > a { display: block; font-size: 1rem; font-weight: 700; color: var(--primary); text-decoration: none; padding: 0.4rem 0; }
-        .mobile-sub-list { list-style: none; padding-left: 1rem; margin-top: 0.3rem; border-left: 2px solid var(--border); }
-        .mobile-sub-list li a { display: block; font-size: 0.88rem; color: var(--text-muted); text-decoration: none; padding: 0.4rem 0; font-weight: 600; }
+        .mobile-nav-item { border-bottom: 1px solid #F1F5F9; padding: 1rem 0; }
+        .mobile-nav-item > a { display: block; font-size: 1.05rem; font-weight: 700; color: var(--primary); text-decoration: none; cursor: pointer; }
 
         .mobile-sidebar .cta-btn-mobile { 
-            width: 100%; 
-            background: var(--primary); 
-            color: var(--white); 
-            border: none; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            font-weight: 800; 
-            font-size: 0.95rem; 
-            margin-top: 2rem; 
-            cursor: pointer; 
-            transition: var(--transition); 
+            width: 100%; background: var(--primary); color: var(--white); border: none; 
+            padding: 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; margin-top: 2.5rem; 
+            cursor: pointer; transition: var(--transition-smooth); 
         }
-        .page-content { display: none; padding-top: 80px; animation: pageFadeIn 0.35s ease-out; }
-        .page-content.active { display: block; }
-        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .mobile-sidebar .cta-btn-mobile:hover { background-color: var(--accent); }
 
-        section { padding: 7rem 2rem; }
-        .section-inner { max-width: 1340px; margin: 0 auto; }
+        /* 페이지 라우팅 전환 애니메이션 */
+        .page-content { display: none; padding-top: 80px; }
+        .page-content.active { display: block; animation: pageSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes pageSlideIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* 트렌디 스크롤 리빌 효과 */
+        .js-reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .js-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        section { padding: 7.5rem 2rem; position: relative; }
+        .section-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
         .center-title-wrap { text-align: center; margin-bottom: 5rem; }
-        .section-tag { display: inline-block; background: rgba(111, 179, 248, 0.12); color: #4A90E2; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 1.2rem; letter-spacing: 1px; }
-        .section-title { font-size: 2.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1.5px; line-height: 1.35; }
-        .section-subtitle { color: var(--text-muted); margin-top: 1rem; font-size: 1.2rem; max-width: 850px; margin-left: auto; margin-right: auto; }
+        .section-tag { 
+            display: inline-block; background: rgba(58, 134, 255, 0.05); color: var(--accent); 
+            padding: 0.4rem 1rem; border-radius: 4px; font-size: 0.8rem; font-weight: 700; 
+            margin-bottom: 1.2rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .section-title { font-size: 2.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1.2px; line-height: 1.3; }
+        .section-subtitle { color: var(--text-muted); margin-top: 1rem; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
-        /* [HOME] */
-        .hero { background: linear-gradient(135deg, #0A1931 0%, #15305B 100%); color: var(--white); padding: 11rem 2rem 11rem 2rem; text-align: center; }
-        .hero h1 { font-size: 3.8rem; font-weight: 900; line-height: 1.3; letter-spacing: -2px; margin-bottom: 2.5rem; word-break: keep-all; }
-        .hero h1 span { color: var(--accent); }
-        .hero p { font-size: 1.35rem; color: #94A3B8; max-width: 900px; margin: 0 auto 4rem auto; line-height: 1.8; word-break: keep-all; }
-        .hero .btn-wrap { display: flex; justify-content: center; gap: 1.5rem; }
-        .hero .btn-main { background-color: var(--accent); color: var(--primary); padding: 1.2rem 3rem; font-size: 1.15rem; font-weight: 800; border-radius: 12px; border: none; box-shadow: 0 10px 25px rgba(111, 179, 248, 0.25); transition: var(--transition); cursor: pointer; }
-        .hero .btn-main:hover { transform: translateY(-4px); background-color: var(--white); color: var(--primary); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2); }
-        .hero .btn-sub { background-color: transparent; color: var(--white); border: 2px solid var(--white); padding: 1.2rem 3rem; font-size: 1.15rem; font-weight: 800; border-radius: 12px; transition: var(--transition); cursor: pointer; }
-        .hero .btn-sub:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateY(-4px); }
+        /* [HOME] HERO - 프로페셔널한 격자 그리드와 차분한 톤 */
+        .hero { 
+            background-color: var(--bg-light); color: var(--primary); padding: 11rem 2rem; text-align: center;
+            position: relative; overflow: hidden;
+            background-image: linear-gradient(rgba(10, 17, 40, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 17, 40, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .hero h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.25; letter-spacing: -1.8px; margin-bottom: 2rem; word-break: keep-all; }
+        .hero h1 .text-highlight { 
+            color: var(--accent); 
+            position: relative;
+            display: inline-block;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 760px; margin: 0 auto 3rem auto; line-height: 1.75; word-break: keep-all; }
+        
+        .hero .btn-wrap { display: flex; justify-content: center; gap: 1rem; }
+        .hero .btn-main { 
+            background-color: var(--primary); color: var(--white); padding: 1rem 2.2rem; font-size: 1rem; 
+            font-weight: 700; border-radius: 8px; border: none; box-shadow: 0 4px 14px rgba(10, 17, 40, 0.1); 
+            transition: var(--transition-smooth); cursor: pointer; 
+        }
+        .hero .btn-main:hover { transform: translateY(-2px); background-color: var(--accent); box-shadow: 0 8px 24px var(--accent-glow); }
+        .hero .btn-sub { 
+            background-color: var(--white); color: var(--primary); border: 1px solid var(--border); 
+            padding: 1rem 2.2rem; font-size: 1rem; font-weight: 700; border-radius: 8px; 
+            transition: var(--transition-smooth); cursor: pointer; box-shadow: var(--premium-shadow);
+        }
+        .hero .btn-sub:hover { background-color: var(--bg-light); border-color: var(--border-hover); transform: translateY(-2px); }
 
-        .stats-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; text-align: center; margin-top: -4rem; position: relative; z-index: 10; padding: 0 2rem; max-width: 1340px; margin-left: auto; margin-right: auto; }
-        .stat-card { background: var(--white); padding: 3rem 1.5rem; border-radius: 20px; box-shadow: var(--card-shadow); border: 1px solid #F1F5F9; }
-        .stat-card h2 { font-size: 3.6rem; font-weight: 900; color: var(--primary); margin-bottom: 0.5rem; }
+        /* 통계 영역 정밀 디자인 고도화 */
+        .stats-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; margin-top: -4rem; position: relative; z-index: 10; padding: 0 2rem; max-width: 1100px; margin-left: auto; margin-right: auto; }
+        .stat-card { 
+            background: var(--white); padding: 2.5rem 1rem; border-radius: 12px; 
+            box-shadow: var(--premium-shadow); border: 1px solid var(--border);
+            transition: var(--transition-smooth);
+        }
+        .stat-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+        .stat-card h2 { font-size: 2.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.4rem; letter-spacing: -1px; }
         .stat-card h2 span { color: var(--accent); }
-        .stat-card p { font-size: 1.1rem; color: var(--text-main); font-weight: 700; }
+        .stat-card p { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; }
 
-        .home-grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 6rem; align-items: center; }
-        .home-corporate-timeline { list-style: none; }
-        .home-corporate-timeline li { position: relative; padding-left: 2.5rem; margin-bottom: 2.5rem; }
-        .home-corporate-timeline li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
-        .home-corporate-timeline li::after { content: ''; position: absolute; left: 5px; top: 1.5rem; width: 2px; height: 100%; background: var(--border); }
+        /* 기업 연혁/스토리 타임라인 단정함 극대화 */
+        .home-grid-row { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; margin-top: 6rem; align-items: center; }
+        .home-corporate-timeline { list-style: none; position: relative; }
+        .home-corporate-timeline li { position: relative; padding-left: 2.5rem; margin-bottom: 3rem; transition: var(--transition-smooth); }
+        .home-corporate-timeline li::before { 
+            content: ''; position: absolute; left: 0; top: 0.4rem; width: 14px; height: 14px; 
+            border-radius: 50%; background: var(--accent); border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--accent-glow); transition: var(--transition-smooth);
+        }
+        .home-corporate-timeline li::after { content: ''; position: absolute; left: 6px; top: 1.6rem; width: 1px; height: calc(100% + 2rem); background: var(--border); }
         .home-corporate-timeline li:last-child::after { display: none; }
-        .home-corporate-timeline li h4 { font-size: 1.25rem; font-weight: 800; color: var(--primary); margin-bottom: 0.3rem; }
-        .home-corporate-timeline li p { color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; }
+        .home-corporate-timeline li:hover { transform: translateX(6px); }
+        .home-corporate-timeline li:hover::before { background: var(--primary); box-shadow: 0 0 0 4px var(--accent-glow); }
+        .home-corporate-timeline li h4 { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .home-corporate-timeline li p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
 
-        /* [BUSINESS MODEL / ROADMAP] */
-        .ubion-style-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-        .ubion-card { flex: 1; min-width: 300px; max-width: 390px; background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; scroll-margin-top: 100px; }
-        .ubion-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--card-shadow); }
-        .ubion-card-img-holder { background-color: var(--primary); color: var(--accent); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 900; position: relative; overflow: hidden; }
-        .ubion-card-img-holder::after { content: ''; position: absolute; width: 150%; height: 100%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); top: 0; left: -150%; transition: 0.6s; }
-        .ubion-card:hover .ubion-card-img-holder::after { left: 150%; }
-        .ubion-card-body { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .ubion-card-body h3 { font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 1rem; }
-        .ubion-card-body p { font-size: 0.95rem; color: var(--text-muted); text-align: justify; margin-bottom: 1.5rem; line-height: 1.6; }
-        .ubion-sub-links { list-style: none; border-top: 1px solid var(--border); padding-top: 1rem; }
-        .ubion-sub-links li { font-size: 0.88rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
-        .ubion-sub-links li::before { content: '▶'; font-size: 0.65rem; color: var(--accent); }
+        /* [비전 & 로드맵] - 우아한 엣지 보더 카드 */
+        .ubion-style-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+        .ubion-card { 
+            background: var(--white); border: 1px solid var(--border); 
+            border-radius: 12px; overflow: hidden; transition: var(--transition-smooth); display: flex; flex-direction: column; 
+            scroll-margin-top: 100px; box-shadow: var(--premium-shadow); position: relative;
+        }
+        .ubion-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+        .ubion-card-img-holder { 
+            background: var(--primary); color: rgba(255, 255, 255, 0.4); height: 120px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 2.5rem; font-weight: 800; position: relative;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .ubion-card-body { padding: 2.2rem 1.8rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .ubion-card-body h3 { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem; letter-spacing: -0.5px; }
+        .ubion-card-body p { font-size: 0.95rem; color: var(--text-muted); text-align: justify; margin-bottom: 2rem; line-height: 1.65; }
+        
+        .ubion-sub-links { list-style: none; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+        .ubion-sub-links li { 
+            font-size: 0.88rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.6rem; 
+            display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.4;
+        }
+        .ubion-sub-links li::before { content: '→'; font-weight: 700; color: var(--accent); }
 
-        /* [ABOUT STEM - 세련되고 감각적인 다크 디자인으로 완전 개편] */
-        .philosophy-section { background-color: #0F172A; color: #FFFFFF; padding: 8rem 2rem; position: relative; }
-        .philosophy-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
-        .phil-left h2 { font-size: 3.2rem; font-weight: 900; line-height: 1.25; letter-spacing: -2px; margin-bottom: 2rem; }
+        /* [ABOUT STEM] 철학 레이아웃 - 플랫 리플렉션 */
+        .philosophy-section { background-color: var(--bg-light); padding: 8rem 2rem; }
+        .philosophy-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 4.5rem; align-items: center; }
+        .phil-left h2 { font-size: 2.8rem; font-weight: 800; line-height: 1.25; letter-spacing: -1.5px; margin-bottom: 2rem; color: var(--primary); }
         .phil-left h2 span { color: var(--accent); }
-        .phil-left p { color: #94A3B8; font-size: 1.15rem; line-height: 1.8; margin-bottom: 2rem; }
+        .phil-left p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.5rem; }
         
-        .phil-right { display: flex; flex-direction: column; gap: 2rem; }
-        .phil-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 2.5rem; border-radius: 16px; transition: var(--transition); position: relative; overflow: hidden; }
-        .phil-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); opacity: 0; transition: var(--transition); }
-        .phil-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateX(8px); }
-        .phil-card:hover::before { opacity: 1; }
-        .phil-card h3 { font-size: 1.4rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
-        .phil-card h3 span { color: var(--accent); font-size: 1.1rem; font-weight: 900; }
-        .phil-card p { color: #94A3B8; font-size: 0.98rem; line-height: 1.7; }
+        .phil-right { display: flex; flex-direction: column; gap: 1.5rem; }
+        .phil-card { 
+            background: var(--white); border: 1px solid var(--border); 
+            padding: 2rem; border-radius: 12px; transition: var(--transition-smooth); position: relative;
+            box-shadow: var(--premium-shadow);
+        }
+        .phil-card:hover { transform: translateX(8px); border-color: var(--accent); }
+        .phil-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem; }
+        .phil-card h3 span { color: var(--accent); font-size: 1rem; font-weight: 800; margin-right: 0.4rem; }
+        .phil-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
         
-        /* [PROGRAMS] */
-        .program-7-container { display: flex; flex-direction: column; gap: 2.5rem; }
-        .prog-row-item { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; display: grid; grid-template-columns: 80px 2.5fr 4fr 1.5fr; gap: 2rem; align-items: center; transition: var(--transition); }
-        .prog-row-item:hover { border-color: var(--accent); box-shadow: var(--card-shadow); }
-        .prog-badge-num { width: 60px; height: 60px; background: var(--bg-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; color: var(--primary); border: 2px solid var(--border); transition: var(--transition); }
-        .prog-row-item:hover .prog-badge-num { background: var(--primary); color: var(--accent); border-color: var(--primary); }
-        .prog-meta-title h3 { font-size: 1.35rem; font-weight: 900; color: var(--primary); margin-bottom: 0.4rem; }
-        .prog-meta-title span { font-size: 0.85rem; background: #EEF2F6; color: #475569; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 0.2rem; }
-        .prog-desc-text { font-size: 0.98rem; color: #334155; line-height: 1.7; }
-        .prog-desc-text ul { list-style: none; margin-top: 0.5rem; }
-        .prog-desc-text ul li { font-size: 0.88rem; color: var(--text-muted); }
-        .prog-target-time { font-size: 0.9rem; text-align: right; color: var(--text-muted); font-weight: 700; line-height: 1.5; }
+        /* [PROGRAMS - 3D 카드 플립 정밀화] */
+        .program-7-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; perspective: 2000px; }
+        .prog-card-flip-container {
+            height: 400px;
+            position: relative;
+            cursor: pointer;
+            perspective: 2000px;
+        }
+        .prog-card-inner {
+            width: 100%; height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 16px;
+            box-shadow: var(--premium-shadow);
+        }
+        .prog-card-flip-container:hover .prog-card-inner {
+            transform: rotateY(180deg);
+        }
 
-        /* [FACULTY & STRATEGY - 팀 인원 확장 및 미니멀 프로필 개편] */
+        .prog-front, .prog-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+        }
+
+        .prog-front {
+            background-color: var(--white);
+        }
+        .prog-back {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: rotateY(180deg);
+            border: none;
+        }
+
+        .prog-badge-num-new {
+            width: 54px; height: 54px; background: var(--bg-light); color: var(--accent);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; font-weight: 800; border: 1px solid var(--border);
+        }
+        .prog-back .prog-badge-num-new {
+            background: var(--accent); color: var(--white); border: none;
+        }
+
+        .prog-front h3 { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-top: 1.5rem; line-height: 1.35; letter-spacing: -0.5px; }
+        .prog-front .prog-tag { display: inline-block; background: var(--bg-light); color: var(--text-muted); padding: 0.3rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.82rem; margin-top: 0.8rem; border: 1px solid var(--border); }
+        .prog-front .flip-guide { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+        .prog-front .flip-guide span { animation: nudge 1.5s infinite alternate; }
+
+        @keyframes nudge {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(4px); }
+        }
+
+        .prog-back h3 { font-size: 1.35rem; font-weight: 700; color: var(--white); }
+        .prog-back p { font-size: 0.92rem; color: #94A3B8; line-height: 1.6; margin-top: 0.8rem; }
+        .prog-back ul { list-style: none; margin-top: 1.2rem; }
+        .prog-back ul li { font-size: 0.88rem; margin-bottom: 0.4rem; color: #CBD5E1; display: flex; align-items: center; gap: 0.4rem; }
+        .prog-back ul li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+        .prog-back .time-info { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.2rem; font-size: 0.88rem; font-weight: 600; color: var(--accent); }
+
+        /* 무한 롤링 배너의 세련된 다크화 */
+        .infinite-ticker-wrapper {
+            background-color: var(--primary); overflow: hidden; white-space: nowrap; padding: 1.5rem 0;
+            display: flex; align-items: center; margin-bottom: 5rem; border-radius: 8px;
+        }
+        .ticker-track {
+            display: inline-block; animation: marquee 25s linear infinite;
+        }
+        .ticker-track span {
+            font-size: 1.3rem; font-weight: 700; color: rgba(255, 255, 255, 0.12); margin-right: 3rem; letter-spacing: 1px;
+        }
+        .ticker-track span strong {
+            color: var(--accent);
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* [FACULTY & TEAM] 디자이너 아우라 카드 */
         .faculty-main-wrapper { scroll-margin-top: 100px; }
-        .faculty-main-wrapper h3 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 2rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); display: inline-block; }
-        .inst-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; }
-        .inst-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--card-shadow); transition: var(--transition); }
-        .inst-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .inst-img { background: #E2E8F0; height: 140px; display: flex; align-items: flex-end; justify-content: center; }
-        .inst-img svg { width: 60px; height: 60px; fill: #475569; margin-bottom: 1.5rem; }
-        .inst-desc { padding: 1.8rem; }
-        .inst-desc h4 { font-size: 1.25rem; font-weight: 900; margin-bottom: 0.4rem; color: var(--primary); }
-        .inst-desc .role { font-size: 0.88rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; }
-        .inst-desc .bio { list-style: none; font-size: 0.9rem; border-top: 1px solid var(--border); padding-top: 0.8rem; }
-        .inst-desc .bio li { margin-bottom: 0.3rem; color: var(--text-muted); }
-
-        .mentor-group-box { background: var(--bg-light); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; text-align: center; }
-        .mentor-group-box h4 { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 0.8rem; }
-        .mentor-group-box p { color: var(--text-muted); font-size: 1rem; max-width: 700px; margin: 0 auto; }
-
-        /* [NOTICES / CAFE LOUNGE] */
-        .cafe-board-container { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); }
-        .cafe-board-header { background-color: #FAFAFA; border-bottom: 1px solid var(--border); padding: 1.2rem 2rem; font-size: 1.1rem; font-weight: 800; color: var(--accent); }
-        .cafe-list-table { width: 100%; border-collapse: collapse; }
-        .cafe-list-table th, .cafe-list-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid #F1F5F9; text-align: center; font-size: 0.95rem; }
-        .cafe-list-table th { background-color: #FAFAFA; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--border); }
-        .cafe-title-td { text-align: left !important; cursor: pointer; font-weight: 700; color: #333; }
-        .cafe-title-td:hover { text-decoration: underline; color: var(--accent); }
-        .cafe-badge-notice { background-color: rgba(111, 179, 248, 0.15); color: #2B6CB0; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; margin-right: 0.5rem; }
-        .comment-count-badge { color: var(--accent); font-weight: 800; font-size: 0.85rem; margin-left: 0.3rem; }
-
-        .cafe-detail-view { display: none; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 3rem; box-shadow: var(--card-shadow); }
-        .cafe-detail-back-btn { background: #F1F5F9; color: var(--text-main); padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; margin-bottom: 2rem; transition: var(--transition); }
-        .cafe-detail-back-btn:hover { background: var(--accent); color: var(--primary); }
-        .cafe-article-header { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; }
-        .cafe-article-body { font-size: 1.05rem; color: #333; line-height: 1.9; min-height: 200px; border-bottom: 1px solid var(--border); padding-bottom: 3rem; margin-bottom: 2rem; text-align: justify; }
+        .inst-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 4rem; }
+        .inst-card { 
+            background: var(--white); border: 1px solid var(--border); border-radius: 12px; 
+            overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--premium-shadow); transition: var(--transition-smooth); 
+        }
+        .inst-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+        .inst-img { 
+            background: var(--bg-light); height: 140px; 
+            display: flex; align-items: flex-end; justify-content: center; position: relative; overflow: hidden;
+        }
+        .inst-img svg { width: 50px; height: 50px; fill: #94A3B8; margin-bottom: 1.2rem; transition: var(--transition-smooth); z-index: 2; }
+        .inst-card:hover .inst-img svg { fill: var(--primary); transform: scale(1.1); }
         
-        .comment-list { list-style: none; margin-bottom: 2rem; }
-        .comment-item { padding: 1.2rem 0; border-bottom: 1px solid #F1F5F9; position: relative; }
-        .comment-meta { font-size: 0.88rem; margin-bottom: 0.3rem; }
-        .comment-writer { font-weight: 700; color: var(--text-main); margin-right: 1rem; }
+        .inst-desc { padding: 2rem 1.5rem; }
+        .inst-desc h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--primary); }
+        .inst-desc .role { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 1.2rem; }
+        .inst-desc .bio { list-style: none; font-size: 0.88rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+        .inst-desc .bio li { margin-bottom: 0.4rem; color: var(--text-muted); }
+
+        .mentor-group-box { 
+            background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 3rem; text-align: center; 
+            position: relative; overflow: hidden;
+        }
+        .mentor-group-box h4 { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 0.8rem; }
+        .mentor-group-box p { color: var(--text-muted); font-size: 1rem; max-width: 700px; margin: 0 auto; line-height: 1.7; }
+
+        /* [SMART LOUNGE - 세련된 프리미엄 게시판] */
+        .cafe-board-container { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--premium-shadow); }
+        .cafe-board-header { 
+            background: var(--primary); padding: 1.5rem 2rem; font-size: 1.1rem; font-weight: 700; color: var(--white); 
+        }
+        .cafe-list-table { width: 100%; border-collapse: collapse; }
+        .cafe-list-table th, .cafe-list-table td { padding: 1.2rem 1.8rem; border-bottom: 1px solid #F1F5F9; text-align: center; font-size: 0.92rem; }
+        .cafe-list-table th { background-color: #FAFAFA; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        .cafe-title-td { text-align: left !important; cursor: pointer; font-weight: 700; color: var(--primary); transition: var(--transition-smooth); }
+        .cafe-title-td:hover { color: var(--accent); padding-left: 2.2rem; }
+        .cafe-badge-notice { background-color: rgba(58, 134, 255, 0.08); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.78rem; font-weight: 700; margin-right: 0.5rem; }
+        .comment-count-badge { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-left: 0.3rem; }
+
+        .cafe-detail-view { display: none; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 3rem; box-shadow: var(--premium-shadow); }
+        .cafe-detail-back-btn { background: #F1F5F9; color: var(--text-main); padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; margin-bottom: 2rem; transition: var(--transition-smooth); font-size: 0.88rem; }
+        .cafe-detail-back-btn:hover { background: var(--accent); color: var(--white); }
+        .cafe-article-header { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        .cafe-article-body { font-size: 1rem; color: #334155; line-height: 1.75; min-height: 200px; border-bottom: 1px solid var(--border); padding-bottom: 3rem; margin-bottom: 2.5rem; text-align: justify; }
+        
+        .comment-list { list-style: none; margin-bottom: 2.5rem; }
+        .comment-item { padding: 1.4rem 0; border-bottom: 1px solid #F1F5F9; position: relative; transition: var(--transition-smooth); }
+        .comment-item:hover { background-color: var(--bg-light); padding-left: 0.8rem; }
+        .comment-meta { font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .comment-writer { font-weight: 700; color: var(--primary); margin-right: 0.8rem; }
         .comment-date { color: var(--text-muted); }
-        .comment-delete-btn { position: absolute; right: 0; top: 1.2rem; background: transparent; color: #FF4D6A; border: none; font-weight: 700; cursor: pointer; }
-        .comment-form-box { background: #FAFAFA; border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; }
-        .comment-textarea { width: 100%; height: 80px; padding: 1rem; border: 1px solid var(--border); border-radius: 6px; resize: none; }
-        .comment-submit-btn { background-color: var(--accent); color: var(--primary); border: none; padding: 0.8rem 1.8rem; border-radius: 6px; font-weight: 800; cursor: pointer; float: right; margin-top: 0.5rem; transition: var(--transition); }
-        .comment-submit-btn:hover { background-color: var(--accent-hover); }
+        .comment-delete-btn { position: absolute; right: 0.8rem; top: 1.4rem; background: transparent; color: #EF4444; border: none; font-weight: 600; cursor: pointer; transition: var(--transition-smooth); font-size: 0.85rem; }
+        .comment-delete-btn:hover { opacity: 0.7; }
+        
+        .comment-form-box { background: #FAFAFA; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; }
+        .comment-textarea { width: 100%; height: 90px; padding: 1rem; border: 1px solid var(--border); border-radius: 6px; resize: none; font-size: 0.92rem; transition: var(--transition-smooth); margin-bottom: 1rem; }
+        .comment-textarea:focus { border-color: var(--accent); outline: none; background: var(--white); }
+        .comment-submit-btn { background: var(--primary); color: var(--white); border: none; padding: 0.8rem 1.8rem; border-radius: 6px; font-weight: 700; cursor: pointer; float: right; transition: var(--transition-smooth); font-size: 0.9rem; }
+        .comment-submit-btn:hover { background: var(--accent); }
 
         /* [SUPPORT FAQ] */
-        .support-wrapper { max-width: 1000px; margin: 0 auto; }
-        .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.2rem; overflow: hidden; background: var(--white); box-shadow: var(--card-shadow); }
-        .faq-q { padding: 1.6rem; font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; font-size: 1.15rem; color: var(--primary); transition: var(--transition); }
+        .support-wrapper { max-width: 900px; margin: 0 auto; }
+        .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.2rem; overflow: hidden; background: var(--white); box-shadow: var(--premium-shadow); transition: var(--transition-smooth); }
+        .faq-item:hover { border-color: var(--accent); }
+        .faq-q { padding: 1.6rem 2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; color: var(--primary); transition: var(--transition-smooth); }
+        .faq-q span { font-size: 0.85rem; transition: var(--transition-smooth); }
         .faq-q:hover { color: var(--accent); }
-        .faq-a { background: var(--bg-light); padding: 1.8rem; border-top: 1px solid var(--border); display: none; color: #475569; line-height: 1.8; text-align: justify; }
+        .faq-a { background: var(--bg-light); padding: 1.8rem 2rem; border-top: 1px solid var(--border); display: none; color: var(--text-muted); line-height: 1.75; font-size: 0.95rem; text-align: justify; }
 
-        /* [APPLY FORM] */
-        .form-page-container { max-width: 800px; margin: 0 auto; background: var(--white); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--card-shadow); padding: 4.5rem 3.5rem; }
-        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 1.5rem; padding-left: 0.5rem; border-left: 4px solid var(--accent); }
+        /* [APPLY FORM - 엔터프라이즈급 정교성] */
+        .form-page-container { max-width: 750px; margin: 0 auto; background: var(--white); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--premium-shadow); padding: 4.5rem 3.5rem; position: relative; overflow: hidden; }
+        .form-page-container::before { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: var(--primary); }
+        .form-section-title { font-size: 1.25rem; font-weight: 800; color: var(--primary); margin-bottom: 2rem; padding-left: 0.6rem; border-left: 4px solid var(--accent); }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .form-group { margin-bottom: 2rem; }
         .form-group.fullwidth { grid-column: span 2; }
-        .form-group label { display: block; font-weight: 800; margin-bottom: 0.8rem; color: var(--primary); font-size: 0.95rem; }
-        .form-group label span { color: #FF4D6A; margin-left: 0.2rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-light); font-size: 1rem; color: var(--text-main); transition: var(--transition); }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { background-color: var(--white); border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(111, 179, 248, 0.15); }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.8rem; color: var(--primary); font-size: 0.92rem; }
+        .form-group label span { color: #EF4444; margin-left: 0.25rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-light); font-size: 0.92rem; color: var(--text-main); transition: var(--transition-smooth); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { background-color: var(--white); border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-glow); }
         
-        .phone-input-wrapper { display: flex; gap: 0.5rem; align-items: center; }
-        .phone-input-wrapper select { width: 110px; flex-shrink: 0; }
+        .phone-input-wrapper { display: flex; gap: 0.6rem; align-items: center; }
+        .phone-input-wrapper select { width: 100px; flex-shrink: 0; }
         
-        .checkbox-agreement-box { background: var(--bg-light); border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 0.8rem; }
-        .checkbox-agreement-box input[type="checkbox"] { width: 18px; height: 18px; margin-top: 0.2rem; cursor: pointer; }
-        .checkbox-agreement-box label { font-size: 0.9rem; color: #475569; font-weight: 600; cursor: pointer; line-height: 1.5; }
+        .checkbox-agreement-box { background: var(--bg-light); border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; margin-bottom: 2.5rem; display: flex; align-items: flex-start; gap: 0.8rem; }
+        .checkbox-agreement-box input[type="checkbox"] { width: 16px; height: 16px; margin-top: 0.25rem; cursor: pointer; accent-color: var(--accent); }
+        .checkbox-agreement-box label { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; cursor: pointer; line-height: 1.5; }
 
-        .btn-submit-direct { width: 100%; background-color: var(--primary); color: var(--white); padding: 1.3rem; font-size: 1.2rem; font-weight: 800; border: none; border-radius: 8px; cursor: pointer; transition: var(--transition); box-shadow: 0 10px 20px rgba(10, 25, 49, 0.15); }
-        .btn-submit-direct:hover { background-color: var(--accent); color: var(--primary); transform: translateY(-2px); }
+        .btn-submit-direct { 
+            width: 100%; background: var(--primary); color: var(--white); padding: 1.2rem; font-size: 1.1rem; 
+            font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: var(--transition-smooth); 
+            box-shadow: 0 4px 12px rgba(10, 17, 40, 0.1); 
+        }
+        .btn-submit-direct:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
 
-        footer { background-color: #1E293B; color: #94A3B8; padding: 4rem 2rem; font-size: 0.9rem; border-top: 1px solid #334155; }
-        .footer-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        footer { background-color: var(--primary); color: #64748B; padding: 4.5rem 2rem; font-size: 0.88rem; border-top: 1px solid rgba(255,255,255,0.02); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
 
-        /* [미디어 쿼리] */
+        /* [반응형 레이아웃] */
         @media (max-width: 1100px) {
             .nav-container nav, .cta-btn-fixed { display: none; }
             .mobile-menu-toggle { display: block; }
-            .nav-container { justify-content: center; height: 65px; }
-            .page-content { padding-top: 65px; }
-            section { padding: 4rem 1.2rem; }
+            .nav-container { justify-content: space-between; height: 70px; padding: 0 1.2rem; }
+            .page-content { padding-top: 70px; }
+            section { padding: 5rem 1.2rem; }
             
-            .center-title-wrap { margin-bottom: 2.5rem; }
-            .section-title { font-size: 1.8rem; letter-spacing: -0.5px; line-height: 1.4; word-break: keep-all; }
+            .center-title-wrap { margin-bottom: 3rem; }
+            .section-title { font-size: 2rem; letter-spacing: -0.6px; line-height: 1.35; word-break: keep-all; }
             .section-subtitle { font-size: 0.95rem; line-height: 1.6; margin-top: 0.6rem; }
 
-            /* 홈화면 */
-            .hero { padding: 6rem 1.2rem 5rem 1.2rem; }
-            .hero h1 { font-size: 2.2rem; letter-spacing: -0.8px; margin-bottom: 1.5rem; line-height: 1.4; }
-            .hero p { font-size: 1rem; margin-bottom: 2.5rem; color: #CBD5E1; }
+            .hero { padding: 7.5rem 1.2rem; }
+            .hero h1 { font-size: 2.4rem; letter-spacing: -0.8px; margin-bottom: 1.5rem; line-height: 1.3; }
+            .hero p { font-size: 1rem; margin-bottom: 2.2rem; }
             .hero .btn-wrap { flex-direction: column; gap: 0.8rem; }
-            .hero .btn-main, .hero .btn-sub { padding: 1rem 1.2rem; font-size: 0.95rem; width: 100%; }
+            .hero .btn-main, .hero .btn-sub { padding: 0.9rem 1.2rem; font-size: 0.95rem; width: 100%; }
 
-            .stats-container { grid-template-columns: 1fr; gap: 1.2rem; margin-top: -2rem; padding: 0 1.2rem; }
-            .stat-card { padding: 2rem 1rem; border-radius: 14px; }
-            .stat-card h2 { font-size: 2.8rem; }
+            .stats-container { grid-template-columns: 1fr; gap: 1rem; margin-top: -2.5rem; padding: 0 1.2rem; }
+            .stat-card { padding: 2rem 1.2rem; border-radius: 8px; }
+            .stat-card h2 { font-size: 2.4rem; }
 
-            .home-grid-row { grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; }
+            .home-grid-row { grid-template-columns: 1fr; gap: 3rem; margin-top: 3rem; }
 
-            /* 로드맵 */
-            .ubion-style-container { flex-direction: column; align-items: center; gap: 1.5rem; }
-            .ubion-card { width: 100%; max-width: 100%; }
-            .ubion-card-img-holder { height: 130px; font-size: 2.5rem; }
-            .ubion-card-body { padding: 1.5rem; }
+            .ubion-style-container { grid-template-columns: 1fr; gap: 1.5rem; }
+            .ubion-card { width: 100%; }
+            .ubion-card-img-holder { height: 100px; font-size: 2rem; }
+            .ubion-card-body { padding: 1.8rem 1.4rem; }
             
-            /* 신념 영역 모바일 */
-            .philosophy-section { padding: 4rem 1.2rem; }
+            .philosophy-section { padding: 5rem 1.2rem; }
             .philosophy-container { grid-template-columns: 1fr; gap: 3rem; }
-            .phil-left h2 { font-size: 2.2rem; }
-            .phil-left p { font-size: 1rem; }
-            .phil-card { padding: 1.8rem 1.5rem; }
-            .phil-card h3 { font-size: 1.2rem; }
+            .phil-left h2 { font-size: 2rem; }
+            .phil-left p { font-size: 0.95rem; }
+            .phil-card { padding: 1.5rem 1.2rem; }
 
-            /* 교육 콘텐츠 */
-            .program-7-container { gap: 1.5rem; }
-            .prog-row-item { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.8rem 1.2rem; border-radius: 14px; }
-            .prog-badge-num { width: 50px; height: 50px; font-size: 1.1rem; }
-            .prog-meta-title h3 { font-size: 1.2rem; }
-            .prog-target-time { text-align: left; border-top: 1px dashed var(--border); padding-top: 0.6rem; margin-top: 0.4rem; }
+            .program-7-container { grid-template-columns: 1fr; gap: 1.8rem; }
+            .prog-card-flip-container { height: 380px; }
+            .prog-front, .prog-back { padding: 2rem 1.5rem; }
 
-            /* 팀 소개 */
             .inst-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .inst-card { border-radius: 14px; }
+            .inst-card { border-radius: 8px; }
             .inst-img { height: 120px; }
-            .inst-desc { padding: 1.5rem; }
+            .inst-desc { padding: 1.5rem 1.2rem; }
 
-            /* 라운지 및 테이블 */
             .cafe-board-container { overflow-x: auto; }
             .cafe-list-table { min-width: 600px; }
-            .cafe-detail-view { padding: 1.5rem 1rem; }
+            .cafe-detail-view { padding: 1.8rem 1.2rem; }
 
-            /* 지원 FAQ */
-            .faq-q { padding: 1.1rem; font-size: 0.95rem; }
-            .faq-a { padding: 1.1rem; font-size: 0.9rem; }
+            .faq-q { padding: 1.2rem 1.2rem; font-size: 1rem; }
+            .faq-a { padding: 1.2rem 1.2rem; font-size: 0.9rem; }
 
-            /* 신청 폼 */
-            .form-page-container { padding: 2rem 1.1rem; }
+            .form-page-container { padding: 2.5rem 1.5rem; }
             .form-grid { grid-template-columns: 1fr; }
             .form-group.fullwidth { grid-column: span 1; }
         }
-
-        img { user-select: none; -webkit-user-drag: none; }
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="header">
         <div class="nav-container">
             <button class="mobile-menu-toggle" id="mobileMenuBtn" onclick="toggleMobileSidebar()">
                 <span></span>
@@ -366,21 +487,14 @@
             </button>
 
             <a class="logo" onclick="navigateTo('home')">
-                <img src="2.png" alt="STEM 로고" style="max-height: 40px; height: auto;">
+                <img src="2.png" alt="STEM 로고">
             </a>
 
             <nav>
                 <ul>
-                    <li><a id="nav-home" onclick="navigateTo('home')">홈</a></li>
-                    <li>
-                        <a id="nav-bm" onclick="navigateTo('bm')">로드맵 & 비전</a>
-                        <ul class="dropdown-menu">
-                            <li><a onclick="navigateTo('bm', 'bm1')">콘텐츠A/B 전략</a></li>
-                            <li><a onclick="navigateTo('bm', 'bm2')">팬덤 및 인지도 구축</a></li>
-                            <li><a onclick="navigateTo('bm', 'bm3')">종합 교육 생태계</a></li>
-                        </ul>
-                    </li>
+                    <li><a id="nav-home" class="active" onclick="navigateTo('home')">홈</a></li>
                     <li><a id="nav-about" onclick="navigateTo('about')">STEM 신념</a></li>
+                    <li><a id="nav-bm" onclick="navigateTo('bm')">학습 지원 프로그램</a> </li>
                     <li><a id="nav-programs" onclick="navigateTo('programs')">교육 콘텐츠</a></li>
                     <li><a id="nav-faculty" onclick="navigateTo('faculty')">팀소개 & 멘토단</a></li>
                     <li><a id="nav-notices" onclick="navigateTo('notices')">스마트 라운지</a></li>
@@ -397,14 +511,7 @@
     <div class="mobile-sidebar" id="mobileSidebar">
         <ul class="mobile-nav-list">
             <li class="mobile-nav-item"><a onclick="closeMobileNav('home')">홈</a></li>
-            <li class="mobile-nav-item">
-                <a onclick="closeMobileNav('bm')">로드맵 & 비전</a>
-                <ul class="mobile-sub-list">
-                    <li><a onclick="closeMobileNav('bm', 'bm1')">콘텐츠A/B 전략</a></li>
-                    <li><a onclick="closeMobileNav('bm', 'bm2')">팬덤 및 인지도 구축</a></li>
-                    <li><a onclick="closeMobileNav('bm', 'bm3')">종합 교육 생태계</a></li>
-                </ul>
-            </li>
+            <li class="mobile-nav-item"><a onclick="closeMobileNav('bm')">학습 지원 프로그램</a></li>
             <li class="mobile-nav-item"><a onclick="closeMobileNav('about')">STEM 신념</a></li>
             <li class="mobile-nav-item"><a onclick="closeMobileNav('programs')">교육 콘텐츠</a></li>
             <li class="mobile-nav-item"><a onclick="closeMobileNav('faculty')">팀소개 & 멘토단</a></li>
@@ -417,33 +524,37 @@
     <!-- HOME -->
     <div id="page-home" class="page-content active">
         <section class="hero">
-            <div class="section-inner">
-                <span class="section-tag" style="background:rgba(255,255,255,0.1); color:var(--accent);">EDUCATION STARTUP</span>
-                <h1>공식만 외우는 공부는<br><span>반드시</span> 막힙니다</h1>
-                <p>단순히 시험 스킬만 배우다 정체기를 겪고 있나요? 과외 네트워크에서 출발한 STEM은 규칙이 생겨나고 적용되는 진짜 '이유'와 깊이 있는 개념을 다루는 프리미엄 콘텐츠 스타트업입니다. 대학 타이틀을 넘어 진짜 내 것으로 만드는 진짜 공부를 제공합니다.</p>
+            <div class="section-inner js-reveal">
+                <span class="section-tag">STEM EDUCATION</span>
+                <h1>시험 요령을 넘어,<br><span class="text-highlight" id="typing-text">진짜 배움의 본질</span>을 고민합니다</h1>
+                <p>
+                    과외 자료를 나누고 고민을 공유하던 명문대 사범대학 및 주요 교육학과 전공생들이 모여 시작했습니다.<br>
+                    단순히 공식만 기계적으로 외우는 공부는 결국 낯선 문제 앞에서 무너집니다.<br>
+                    규칙이 탄생한 본질적 원리부터 시야를 확장하는 고품격 무료 교육 콘텐츠를 지금 만나보세요.
+                </p>
                 <div class="btn-wrap">
-                    <button onclick="navigateTo('programs')" class="btn-main">콘텐츠 라인업 ➔</button>
-                    <button onclick="navigateTo('apply')" class="btn-sub">무료 구독 신청하기</button>
+                    <button class="btn-main" onclick="navigateTo('apply')">무료 구독 시작하기 ➔</button>
+                    <button class="btn-sub" onclick="navigateTo('about')">STEM 스토리 보기</button>
                 </div>
             </div>
         </section>
 
-        <div class="stats-container">
-            <div class="stat-card"><h2>A & B<span></span></h2><p>차별화된 이원화 콘텐츠</p></div>
-            <div class="stat-card"><h2>1020<span>대</span></h2><p>최적의 타겟 집중 소통</p></div>
-            <div class="stat-card"><h2>100<span>%</span></h2><p>개념 이해 및 원리 추적</p></div>
-            <div class="stat-card"><h2>0<span>%</span></h2><p>단순 암기 주입 배제</p></div>
+        <div class="stats-container js-reveal">
+            <div class="stat-card"><h2>2,700 회</h2><p>누적 멘토링</p></div>
+            <div class="stat-card"><h2>4.8 / 5</h2><p>AI 코칭 만족도</p></div>
+            <div class="stat-card"><h2>21 +</h2><p>직무 분야</p></div>
+            <div class="stat-card"><h2>10, 20 대</h2><p>최적의 타겟 집중 소통</p></div>
         </div>
 
         <section>
             <div class="section-inner">
                 <div class="home-grid-row">
-                    <div>
+                    <div class="js-reveal">
                         <span class="section-tag">OUR STORY</span>
-                        <h2 class="section-title" style="text-align:left; margin-bottom: 2rem;">과외 매칭 네트워크에서<br>콘텐츠 중심 커뮤니티로.</h2>
-                        <p style="color:var(--text-muted); margin-bottom: 2rem;">학생들을 가장 가까이에서 도우며 깨달았습니다. 단순한 과외 중개는 본질을 해결하지 못합니다. 입시가 취업 수단으로 전락한 지금, 학생들이 이해되지 않은 단순 규칙 적용에서 벗어나 진짜 배움의 본질을 깨달을 때 비로소 응용의 벽이 뚫립니다. 우리는 이를 실현하기 위해 양질의 에듀 아카이브를 구축해 나가고 있습니다.</p>
+                        <h2 class="section-title" style="text-align:left; margin-bottom: 2rem;">과외 매칭 네트워크에서<br>콘텐츠 중심 커뮤니티로</h2>
+                        <p style="color:var(--text-muted); margin-bottom: 2rem; font-size: 1rem; line-height: 1.75;">학생들을 가장 가까이에서 도우며 깨달았습니다. 단순한 과외 중개는 본질을 해결하지 못합니다. 입시가 취업 수단으로 전락한 지금, 학생들이 이해되지 않은 단순 규칙 적용에서 벗어나 진짜 배움의 본질을 깨달을 때 비로소 응용의 벽이 뚫립니다. 우리는 이를 실현하기 위해 양질의 에듀 아카이브를 구축해 나가고 있습니다.</p>
                     </div>
-                    <div>
+                    <div class="js-reveal">
                         <ul class="home-corporate-timeline">
                             <li>
                                 <h4>Next STEP — 종합 에듀 & 진로 매칭 플랫폼 론칭</h4>
@@ -466,25 +577,26 @@
 
     <!-- BUSINESS ROADMAP -->
     <div id="page-bm" class="page-content">
-        <section style="background-color: var(--bg-light);">
+        <section>
             <div class="section-inner">
-                <div class="center-title-wrap">
-                    <span class="section-tag">BUSINESS STRATEGY</span>
-                    <h2 class="section-title">STEM 3대 핵심 성장 로드맵</h2>
-                    <p class="section-subtitle">과외 중개 커뮤니티에서 출발하여 1020의 강력한 팬덤을 이끄는 에듀테크 스타트업으로 도약하는 독보적인 투트랙 전략입니다.</p>
+                <div class="center-title-wrap js-reveal">
+                    <span class="section-tag">LEARNING ASSISTANCE</span>
+                    <h2 class="section-title">학습 지원 프로그램</h2>
+                    <p class="section-subtitle">STEM은 콘텐츠를 통한 선한 영향력 확장을 목표로 삼고, 단계별로 교육 생태계를 만들어 갑니다.</p>
                 </div>
 
-                <div class="ubion-style-container">
+                <div class="ubion-style-container js-reveal">
                     <div class="ubion-card" id="target-bm1">
                         <div class="ubion-card-img-holder">01</div>
                         <div class="ubion-card-body">
                             <div>
-                                <h3>콘텐츠 이원화 팬덤 구축</h3>
-                                <p>과외 네트워크에서 파생된 1020 커뮤니티를 적극 활용, 강력한 투트랙 교육 콘텐츠를 배포하며 대중적 인지도를 쌓아갑니다.</p>
+                                <h3>STEM MENTOR</h3>
+                                <p>목표 대학 및 학과에 재학 중인 대학생 멘토와 학생을 연결하여 입시 경험, 학습 전략, 대학 생활, 진로에 대한 현실적인 조언을 제공하는 멘토링 서비스입니다.</p>
                             </div>
                             <ul class="ubion-sub-links">
-                                <li>콘텐츠A: 응용이 자유로워지는 핵심 개념 해체</li>
-                                <li>콘텐츠B: 진로 탐방 인터뷰 및 공부 관련 병맛 밈</li>
+                                <li>목표 대학·학과에 맞는 대학생 멘토 매칭</li>
+                                <li>과목별 공부법 및 학습 계획 상담</li>
+                                <li>입시 경험 및 합격 전략 공유</li>
                             </ul>
                         </div>
                     </div>
@@ -493,12 +605,13 @@
                         <div class="ubion-card-img-holder">02</div>
                         <div class="ubion-card-body">
                             <div>
-                                <h3>이유를 증명하는 프리미엄 교육</h3>
-                                <p>단순 시험 기술이 아니라 공식과 규칙이 설계된 본질적인 이유를 함께 연구하여, 어떤 난제에도 막히지 않는 응용력을 선사합니다.</p>
+                                <h3>STEM AI</h3>
+                                <p>AI가 학생의 목표, 성적, 공부 습관, 학습 데이터를 분석하여 개인 맞춤형 학습 계획과 피드백을 제공하는 학습 관리 서비스합니다.</p>
                             </div>
                             <ul class="ubion-sub-links">
-                                <li>공식 유도 및 원리 추적 콘텐츠</li>
-                                <li>스스로 생각하는 자기 주도 러닝 프레임</li>
+                                <li>목표 달성률 확인</li>
+                                <li>공부 중 궁금한 개념이나 문제 풀이를 AI에게 질문</li>
+                                <li>공부 시간과 과목별 학습량을 분석</li>
                             </ul>
                         </div>
                     </div>
@@ -507,12 +620,13 @@
                         <div class="ubion-card-img-holder">03</div>
                         <div class="ubion-card-body">
                             <div>
-                                <h3>종합 교육 플랫폼으로 도약</h3>
-                                <p>쌓아 올린 구독자 인프라와 교육 데이터를 집약하여, 대학 진학 이후의 진로까지 연결하는 양질의 테크 플랫폼을 완성합니다.</p>
+                                <h3>STEM CAREER</h3>
+                                <p>학생이 관심 있는 직무와 산업을 미리 경험하고, 현직자와 직접 소통하며 진로를 구체적으로 설계할 수 있도록 지원하는 진로 탐색 서비스입니다.</p>
                             </div>
                             <ul class="ubion-sub-links">
-                                <li>개인화된 지능형 멘토 매칭</li>
-                                <li>10대-20대 연계 진로·커리어 생태계</li>
+                                <li>관심 직무의 현직자와 1:1 또는 그룹 멘토링</li>
+                                <li>원하는 직무에 필요한 전공, 자격증, 대외활동 등을 단계별로 안내</li>
+                                <li>현직자에게 질문하고 답변을 받을 수 있는 공간</li>
                             </ul>
                         </div>
                     </div>
@@ -521,27 +635,32 @@
         </section>
     </div>
 
-    <!-- ABOUT STEM (세련된 다크톤의 인포그래픽형 레이아웃으로 변경) -->
+    <!-- ABOUT STEM -->
     <div id="page-about" class="page-content">
         <section class="philosophy-section">
             <div class="philosophy-container">
-                <div class="phil-left">
-                    <span class="section-tag" style="background: rgba(111, 179, 248, 0.15); color: var(--accent);">OUR PHILOSOPHY</span>
-                    <h2>스스로<br>사유하지 못하는 지식은<br><span>가짜</span>입니다.</h2>
-                    <p>단순히 정답을 내는 스킬은 일시적입니다. STEM은 규칙이 설계된 원리부터 끈질기게 추적하여 공부에 대한 시야를 넓힙니다. 1020이 진짜 배움의 효능감을 느끼고 주도적으로 성장할 수 있는 커뮤니티를 설계합니다.</p>
+                <div class="phil-left js-reveal">
+                    <span class="section-tag">OUR MISSION</span>
+                    <h2>배움을 넘어<br>학생의 <span>성장을 설계</span>하다</h2>
+                    <p>
+                        STEM은 과외 중개 서비스에서 시작되었습니다. 수많은 학생과 멘토를 연결하는 과정에서 우리는 학생들에게 필요한 것은 <strong>강의 하나가 아니라</strong>, 목표까지 함께 걸어줄 <strong>체계적인 학습 관리와 진로 설계</strong>라는 사실을 발견했습니다.<br><br>
+                        이를 바탕으로 STEM은 AI 학습 코칭, 대학생 멘토링, 현직자 멘토링을 통해 학생의 <strong>학습과 진로를 함께 설계</strong>하는 교육 플랫폼으로 발전했습니다.<br><br>
+                        우리는 단순한 지식 전달을 넘어, 학생이 목표를 이루는 모든 과정을 함께하는 든든한 파트너가 되고자 합니다.
+                    </p>
                 </div>
-                <div class="phil-right">
+            
+                <div class="phil-right js-reveal">
                     <div class="phil-card">
-                        <h3><span>01</span> 원리 추적 학습</h3>
-                        <p>공식이 어떻게 유도되었는지 본질부터 파헤칩니다. 기초 개념의 뼈대를 단단하게 이해하면 복잡한 응용 문제도 자연스레 해결의 실마리가 잡힙니다.</p>
+                        <h3><span>MENTOR</span> 경험을 공유하여 더 나은 선택을 돕습니다</h3>
+                        <p>대학생과 현직자의 실제 경험을 바탕으로 학습 방향과 진로를 제시합니다.<br>학생이 자신의 목표에 맞는 선택을 할 수 있도록 함께 성장합니다.</p>
                     </div>
                     <div class="phil-card">
-                        <h3><span>02</span> 자발적 동기부여</h3>
-                        <p>목적 없는 암기에서 벗어나 왜 공부를 해야 하는지, 지식이 실생활과 진로에 어떻게 연결되는지 스스로 납득하는 즐거움을 일깨웁니다.</p>
+                        <h3><span>AI</span> 기술로 학습을 더 효율적으로 만듭니다.</h3>
+                        <p>학생의 학습 데이터를 분석하여 개인 맞춤형 학습 계획과 피드백을 제공합니다.<br>AI 학습 코치를 통해 목표 달성까지 체계적인 학습 관리를 지원합니다.</p>
                     </div>
                     <div class="phil-card">
-                        <h3><span>03</span> 또래 멘토십 시너지</h3>
-                        <p>수많은 과외 지도를 통해 축적된 데이터를 바탕으로, 학생들의 가려운 부분을 정확히 짚어내고 함께 러닝 메이트가 되어 성장합니다.</p>
+                        <h3><span>CONNECTION</span> 학생과 멘토, 학생과 진로를 연결합니다</h3>
+                        <p>학생에게 필요한 사람과 정보를 연결하여 성장의 기회를 제공합니다.<br>배움부터 진로까지 함께할 수 있는 교육 네트워크를 만들어갑니다.</p>
                     </div>
                 </div>
             </div>
@@ -552,100 +671,177 @@
     <div id="page-programs" class="page-content">
         <section>
             <div class="section-inner">
-                <div class="center-title-wrap">
-                    <span class="section-tag">CURRICULUM LINEUP</span>
-                    <h2 class="section-title">STEM 양질의 교육 콘텐츠 라인업</h2>
-                    <p class="section-subtitle">단순 주입 암기를 배제하고, 지루함은 날려버리며, 원리를 탐구하게 만드는 투트랙 콘텐츠 라인업입니다.</p>
+                <div class="center-title-wrap js-reveal">
+                    <span class="section-tag">INSTAGRAM</span>
+                    <h2 class="section-title">STEM 공식 인스타그램</h2>
+                    <p class="section-subtitle">가장 빠르게 업데이트되는 카드뉴스와 다양한 소식을 인스타그램에서 만나보세요.</p>
                 </div>
 
-                <div class="program-7-container">
-                    <div class="prog-row-item">
-                        <div class="prog-badge-num">A</div>
-                        <div class="prog-meta-title">
-                            <h3>[콘텐츠A] 딥(Deep) 개념 해체 & 원리 추적 리포트</h3>
-                            <span>대상: 단순 암기를 거부하고 과목의 진짜 원리를 꿰뚫고 싶은 1020</span>
+                <!-- 단일 인스타그램 3D 카드 (클릭 시 인스타로 이동) -->
+                <div class="program-7-container js-reveal" style="grid-template-columns: 1fr; max-width: 500px; margin: 0 auto;">
+                    <div class="prog-card-flip-container" onclick="window.open('https://www.instagram.com/stem_studio_official', '_blank')">
+                        <div class="prog-card-inner">
+                            <!-- 앞면 -->
+                            <div class="prog-front" style="align-items: center; justify-content: center; text-align: center; gap: 1.5rem;">
+                                <!-- 인스타그램 로고 아이콘 (SVG) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="url(#insta-grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <defs>
+                                        <linearGradient id="insta-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#f9ce34" />
+                                            <stop offset="50%" stop-color="#ee2a7b" />
+                                            <stop offset="100%" stop-color="#6228d7" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                                <div>
+                                    <h3 style="margin-top: 0; font-size: 1.8rem; color: var(--primary);">@stem_studio_official</h3>
+                                    <span class="prog-tag" style="background: rgba(238, 42, 123, 0.08); color: #ee2a7b; border-color: rgba(238, 42, 123, 0.2);">공식 인스타그램 바로가기</span>
+                                </div>
+                                <div class="flip-guide">
+                                    <span>➔</span> 마우스를 올리거나 터치해 보세요
+                                </div>
+                            </div>
+                            <!-- 뒷면 -->
+                            <div class="prog-back" style="align-items: center; justify-content: center; text-align: center;">
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                                    <h3 style="margin-bottom: 0.5rem; font-size: 1.6rem; color: var(--white);">지금 팔로우하고<br>실시간 소식 받기</h3>
+                                    <p style="text-align: center; color: #CBD5E1; margin: 0 auto 1.5rem auto; max-width: 320px; line-height: 1.5;">공식 계정을 팔로우하시면 소식을 가장 빠르게 받아보실 수 있습니다.</p>
+                                    <span style="background: var(--white); color: var(--primary); padding: 0.8rem 2rem; border-radius: 30px; font-weight: 800; font-size: 0.95rem; display: inline-block;">
+                                        인스타그램 열기 ➔
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="prog-desc-text">
-                            교과서에 나오는 공식과 규칙이 어떤 배경에서 설계되었는지 본질을 파고듭니다. 명문대 과외 멘토들의 원리 독해 노하우를 집약하여, 변형 문제나 응용 킬러 문항을 만나도 스스로 해결할 수 있는 탄탄한 개념의 힘을 길러줍니다.
-                            <ul>
-                                <li>• <strong>주요 구성:</strong> 교과 개념 증명 바이블, 시각화 수학/과학 리포트, 논리 추적 가이드</li>
-                                <li>• <strong>제공 방식:</strong> PDF 디지털 전용 구독 배포 및 멤버십 피드백 지원</li>
-                            </ul>
-                        </div>
-                        <div class="prog-target-time">매월 정기 구독<br>매주 주간 개념 리포트 발행</div>
-                    </div>
-
-                    <div class="prog-row-item">
-                        <div class="prog-badge-num">B</div>
-                        <div class="prog-meta-title">
-                            <h3>[콘텐츠B] 유쾌한 공부 밈 & 1020 진로 탐방 라운지</h3>
-                            <span>대상: 공부에 지쳤거나 진로와 미래에 대한 진짜 조언이 필요한 모든 학생</span>
-                        </div>
-                        <div class="prog-desc-text">
-                            딱딱한 교육의 문턱을 낮추는 유쾌한 콘텐츠입니다. 공부 자극 유머 스토리와 짤방을 배포하며, 학생들이 배움과 진학을 재미있게 마주할 수 있도록 돕습니다. 멘토 선배들의 날것 그대로의 가감 없는 진로 이야기도 포함됩니다.
-                            <ul>
-                                <li>• <strong>주요 구성:</strong> 현실 선배 대학·커리어 인터뷰, 공부 자극 밈 스토리툰, 고민 상담소</li>
-                                <li>• <strong>제공 방식:</strong> STEM 공식 SNS 및 멤버십 커뮤니티 전면 무료 개방</li>
-                            </ul>
-                        </div>
-                        <div class="prog-target-time">상시 오픈<br>매주 화/목 콘텐츠 업로드</div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- FACULTY (간소화 및 멤버 구성 현실화) -->
+    <!-- FACULTY & TEAM -->
     <div id="page-faculty" class="page-content">
-        <section>
+        <section style="padding-top: 3rem;">
             <div class="section-inner">
-                <div class="center-title-wrap">
-                    <span class="section-tag">STEM CREATORS</span>
-                    <h2 class="section-title">본질을 탐구하는 STEM 콘텐츠 기획단</h2>
-                    <p class="section-subtitle">수많은 과외 지도 노하우를 보유한 대학생 멘토단과 콘텐츠 디렉터팀이 함께 움직입니다.</p>
+                <!-- 무한 롤링 텍스트 트랙 -->
+                <div class="infinite-ticker-wrapper js-reveal">
+                    <div class="ticker-track">
+                        <span>LEARN WITH STEM <strong>STEM PARTNERS</strong></span>
+                        <span>대학생 멘토와 현직자 멘토 <strong>STEM ARCHIVE</strong></span>
+                        <span>LEARN WITH STEM <strong>STEM PARTNERS</strong></span>
+                        <span>대학생 멘토와 현직자 멘토 <strong>STEM ARCHIVE</strong></span>
+                    </div>
                 </div>
 
-                <div class="faculty-main-wrapper" id="target-teacher">
-                    <h3>💡 핵심 크리에이터 & 디렉터</h3>
+                <div class="center-title-wrap js-reveal">
+                    <span class="section-tag">STEM PARTNERS</span>
+                    <h2 class="section-title">현직자 멘토</h2>
+                </div>
+
+                <div class="faculty-main-wrapper js-reveal">
                     <div class="inst-grid">
                         <div class="inst-card">
-                            <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
                             <div class="inst-desc">
-                                <h4>박준혁</h4>
-                                <div class="role">콘텐츠A 총괄 (수리/이과 영역)</div>
+                                <h4>김민준 멘토</h4>
+                                <div class="role">국내 대기업 반도체 공정 엔지니어</div>
                                 <ul class="bio">
-                                    <li>• 서울대학교 수리과학부</li>
-                                    <li>• 수리 개념 해체 프로젝트 설계</li>
+                                    <li>국내 대표 반도체 기업에서 공정 개발 및 생산 최적화 업무를 담당하고 있습니다. 전기·전자공학 진학부터 반도체 취업 준비까지 실제 경험을 바탕으로 현실적인 조언을 제공합니다.</li><br>
+                                    <li>• 경력: 6년</li>
+                                    <li>• 멘토링: 320+회</li>
                                 </ul>
                             </div>
                         </div>
+
                         <div class="inst-card">
-                            <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
                             <div class="inst-desc">
-                                <h4>유소민</h4>
-                                <div class="role">콘텐츠B 기획 (교육/진로 멘토링)</div>
+                                <h4>이서연 멘토</h4>
+                                <div class="role">상급종합병원 간호사</div>
                                 <ul class="bio">
-                                    <li>• 연세대학교 교육학과</li>
-                                    <li>• 1020 고민 상담 및 선배 인터뷰 기획</li>
+                                    <li>수도권 상급종합병원에서 임상 간호사로 근무하며 다양한 진료과를 경험했습니다. 간호학과 진학, 국가고시 준비, 병원 취업 과정에 대한 실질적인 멘토링을 제공합니다.</li><br>
+                                    <li>• 경력: 5년</li>
+                                    <li>• 멘토링: 270+회</li>
                                 </ul>
                             </div>
                         </div>
+
                         <div class="inst-card">
-                            <div class="inst-img"><svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="20"/><path d="M20 90 C20 65, 80 65, 80 90"/></svg></div>
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
                             <div class="inst-desc">
-                                <h4>한채원</h4>
-                                <div class="role">브랜드 비주얼 디렉터</div>
+                                <h4>박지훈 멘토</h4>
+                                <div class="role">국내 IT 플랫폼 기업 백엔드 개발자</div>
                                 <ul class="bio">
-                                    <li>• 홍익대학교 디자인학부</li>
-                                    <li>• STEM 시각 자료 및 카드뉴스 비주얼 총괄</li>
+                                    <li>국내 대표 IT 플랫폼 기업에서 백엔드 시스템과 클라우드 서비스를 개발하고 있습니다. 개발자 취업 로드맵, 포트폴리오, 코딩 테스트 준비까지 실무 경험을 바탕으로 멘토링을 제공합니다.</li><br>
+                                    <li>• 경력: 7년</li>
+                                    <li>• 멘토링: 410+회</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mentor-group-box">
-                        <h4>🎓 명문대 재학생 멘토단</h4>
-                        <p>서울대, 연세대, 고려대, 카이스트 출신 등 탄탄한 문제 해결력을 인정받은 30여 명의 정예 대학생 멘토들이 실시간 질의응답 및 멘토링 콘텐츠 제작에 참여하고 있습니다.</p>
+<br><br><br><br><br>
+                <div class="center-title-wrap js-reveal">
+                    <h2 class="section-title">대학생 멘토</h2>
+                </div>
+
+                <div class="faculty-main-wrapper js-reveal">
+                    <div class="inst-grid">
+                        <div class="inst-card">
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                            <div class="inst-desc">
+                                <h4>김도현 멘토</h4>
+                                <div class="role">국내 최상위권 대학 기계공학과 4학년</div>
+                                <ul class="bio">
+                                    <li>기계공학과 진학을 목표로 수능과 학생부를 준비했으며, 다양한 공학 프로젝트를 경험했습니다. 공학계열 입시 전략과 대학 생활, 진로 설계에 대한 현실적인 멘토링을 제공합니다.</li><br>
+                                    <li>• 누적 멘토링: 180+회</li>
+                                    <li>• 평균 만족도: 4.9/5</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="inst-card">
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                            <div class="inst-desc">
+                                <h4>박서연 멘토</h4>
+                                <div class="role">수도권 명문대 심리학과 3학년</div>
+                                <ul class="bio">
+                                    <li>심리학과 진학 과정과 대학 생활을 직접 경험하며 학습 전략과 진로 탐색의 중요성을 배웠습니다. 학과 선택, 대학 생활, 진로 고민에 대한 현실적인 조언을 제공합니다.</li><br>
+                                    <li>• 누적 멘토링: 150+회</li>
+                                    <li>• 평균 만족도: 4.8/5</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="inst-card">
+                            <div class="inst-img">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                            <div class="inst-desc">
+                                <h4>이준혁 멘토</h4>
+                                <div class="role">국내 최상위권 대학 경영학과 4학년</div>
+                                <ul class="bio">
+                                    <li>수능과 학생부를 바탕으로 경영학과에 진학했으며, 다양한 대외활동과 프로젝트를 경험했습니다. 입시 준비부터 대학 생활, 진로 및 취업 준비까지 실질적인 멘토링을 제공합니다.</li><br>
+                                    <li>• 누적 멘토링: 210+회</li>
+                                    <li>• 평균 만족도: 4.9/5</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
                     </div>
                 </div>
             </div>
@@ -656,14 +852,12 @@
     <div id="page-notices" class="page-content">
         <section>
             <div class="section-inner">
-                <div class="center-title-wrap">
+                <div class="center-title-wrap js-reveal">
                     <span class="section-tag">COMMUNITY ROUND</span>
-                    <h2 class="section-title">STEM 스마트 라운지</h2>
-                    <p class="section-subtitle">게시글을 클릭하면 상세 내용으로 진입하며 멘토 및 동료 학생들과 자유롭게 소통할 수 있습니다.</p>
+                    <h2 class="section-title">커뮤니티</h2>
                 </div>
 
-                <div id="cafe-list-view" class="cafe-board-container">
-                    <div class="cafe-board-header">📢 전체 공지사항 및 실시간 학습 정보 공유판</div>
+                <div id="cafe-list-view" class="cafe-board-container js-reveal">
                     <table class="cafe-list-table">
                         <thead>
                             <tr>
@@ -682,11 +876,11 @@
                     <div id="cafe-detail-render-target"></div>
                     
                     <div style="margin-top: 3rem;">
-                        <h4 style="font-size:1.1rem; font-weight:800; color:var(--primary); margin-bottom:1rem;">💬 실시간 소통 댓글 스크럼</h4>
+                        <h4 style="font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:1.2rem;">💬 실시간 소통 댓글 스크럼</h4>
                         <ul class="comment-list" id="cafe-comment-render-target"></ul>
                         
                         <div class="comment-form-box">
-                            <input type="text" id="comment-nickname" placeholder="닉네임 입력 (예: 공부짱)" style="width:250px; margin-bottom:0.5rem; display:block; padding:0.5rem; border:1px solid var(--border); border-radius:4px;">
+                            <input type="text" id="comment-nickname" placeholder="닉네임 입력 (예: 공부짱)" style="width:250px; margin-bottom:0.8rem; display:block; padding:0.6rem; border:1px solid var(--border); border-radius:6px; font-size:0.88rem;">
                             <textarea id="comment-content" class="comment-textarea" placeholder="타인을 비방하거나 광고성 글은 경고 없이 통제 삭제 조치됩니다."></textarea>
                             <button onclick="addCommentSubmit()" class="comment-submit-btn">댓글 등록하기</button>
                             <div style="clear:both;"></div>
@@ -701,33 +895,38 @@
     <div id="page-support" class="page-content">
         <section style="background-color: var(--bg-light);">
             <div class="section-inner">
-                <div class="center-title-wrap">
+                <div class="center-title-wrap js-reveal">
                     <span class="section-tag">SUPPORT FAQ</span>
                     <h2 class="section-title">자주 묻는 질문</h2>
                     <p class="section-subtitle">STEM의 콘텐츠 운영 방식과 비전에 대한 가이드라인 리포트입니다.</p>
                 </div>
 
-                <div class="support-wrapper">
+                <div class="support-wrapper js-reveal">
                     <div class="faq-item">
-                        <div class="faq-q" onclick="toggleFaq(this)">Q1. 과외 매칭 서비스와 교육 콘텐츠는 어떻게 연계되나요? <span>▼</span></div>
+                        <div class="faq-q" onclick="toggleFaq(this)">Q1. STEM은 어떤 서비스인가요? <span>▼</span></div>
                         <div class="faq-a">
-                            기존의 과외 중개는 선생님을 연결해 주는 데서 끝났습니다. STEM은 여기서 한발 더 나아가, <strong>과외 수업 중이나 혼자 공부할 때 언제든 꺼내볼 수 있는 검증된 부교재 콘텐츠</strong>를 제공합니다.<br><br>
-                            매칭된 명문대 멘토들이 STEM의 고유 콘텐츠를 수업에 직접 활용하기 때문에, 어떤 과외보다도 깊이 있고 통일감 있는 개념 수업이 가능합니다.
+                            STEM은 AI 학습 코칭과 대학생·현직자 멘토링을 통해 학생의 <strong>학습과 진로를 함께 설계</strong>하는 교육 플랫폼입니다.
+                        </div>
+                    </div>
+                <div class="support-wrapper js-reveal">
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q2. STEM은 인강을 제공하나요? <span>▼</span></div>
+                        <div class="faq-a">
+                            <strong>아닙니다.</strong> STEM은 강의를 제공하기보다 AI 학습 관리와 멘토링을 통해 학생의 학습 과정과 진로 설계를 지원합니다.
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-q" onclick="toggleFaq(this)">Q2. 콘텐츠A와 콘텐츠B는 각각 어떻게 제공되나요? <span>▼</span></div>
+                        <div class="faq-q" onclick="toggleFaq(this)">Q3. 멘토는 직접 선택할 수 있나요? <span>▼</span></div>
                         <div class="faq-a">
-                            • <strong>콘텐츠A (개념 해체):</strong> 매주 정기적으로 배포되는 디지털 개념 리포트입니다. 단순 문제 풀이 기술이 아니라 원리부터 파헤치는 심화 요약본(PDF) 형식으로 회원들에게 발송됩니다.<br>
-                            • <strong>콘텐츠B (진로 및 쉼터):</strong> 공부 자극 밈 스토리, 학업 스트레스를 날릴 가벼운 읽을거리, 그리고 실제 대학 선배들의 현실적이고 솔직한 전공 이야기를 비정기적으로 업로드하여 공부의 외적인 멘탈 관리를 돕습니다.
+                            네. 관심 전공, 직무, 분야를 기준으로 <strong>원하는 멘토를 직접 선택</strong>하거나 추천받을 수 있습니다.
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-q" onclick="toggleFaq(this)">Q3. 콘텐츠 구독에 비용이 발생하나요? <span>▼</span></div>
+                        <div class="faq-q" onclick="toggleFaq(this)">Q4. 어떤 학생에게 추천하나요? <span>▼</span></div>
                         <div class="faq-a">
-                            현재 STEM 스타트업 론칭 기념으로 <strong>모든 콘텐츠는 무료로 구독</strong>하실 수 있습니다. 신청서를 작성해 주시면 메일과 스마트폰 알림톡을 통해 고해상도 PDF 자료집을 보내드립니다.
+                            입시를 준비하는 고등학생부터 대학 생활과 진로를 고민하는 대학생까지 <strong>누구나</strong> 이용할 수 있습니다.
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </section>
@@ -737,13 +936,13 @@
     <div id="page-apply" class="page-content">
         <section style="background-color: var(--bg-light);">
             <div class="section-inner">
-                <div class="center-title-wrap">
+                <div class="center-title-wrap js-reveal">
                     <span class="section-tag">PREMIUM SUBSCRIPTION</span>
                     <h2 class="section-title">STEM 교육 콘텐츠 무료 구독 신청서</h2>
                     <p class="section-subtitle">본질을 뚫는 개념 리포트와 진로 탐색 인터뷰를 주기적으로 가장 먼저 받아보고 싶다면 입력해 주세요.</p>
                 </div>
 
-                <div class="form-page-container">
+                <div class="form-page-container js-reveal">
                     <form id="stemConsultingForm">
                         <div class="form-section-title">1. 구독자 인적 사항</div>
                         <div class="form-grid">
@@ -823,9 +1022,8 @@
     <footer>
         <div class="footer-inner">
             <div>
-                <p style="font-weight: 900; font-size: 1.2rem; color: var(--white); margin-bottom: 0.5rem;">STEM 에듀 콘텐츠 플랫폼</p>
+                <p style="font-weight: 800; font-size: 1.1rem; color: var(--white); margin-bottom: 0.4rem;">STEM 에듀 콘텐츠 플랫폼</p>
                 <p>과외 중개 커뮤니티에서 출발하여 공부의 본질을 찾아가는 여정</p>
-                <p>대표이사: 에듀 스타트업 창업 연합 | 사업자등록번호: 220-88-XXXXX</p>
             </div>
             <div>
                 <p>© 2026 STEM Inc. All Rights Reserved. Powered by High-Quality Education Content.</p>
@@ -834,6 +1032,39 @@
     </footer>
 
     <script>
+        // 헤드라인 자동 타이핑 텍스트 효과
+        const phrases = ["진짜 배움의 본질", "수식이 탄생한 원리", "공부의 숨은 재미", "나만의 확실한 진로"];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const targetElement = document.getElementById("typing-text");
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                targetElement.innerText = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                targetElement.innerText = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeLoop, 2000);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                setTimeout(typeLoop, 500);
+            } else {
+                setTimeout(typeLoop, isDeleting ? 50 : typingSpeed);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            typeLoop();
+        });
+
         // 모바일 사이드바 개폐
         function toggleMobileSidebar() {
             const sidebar = document.getElementById('mobileSidebar');
@@ -851,7 +1082,6 @@
             }
         }
 
-        // 모바일 서브메뉴
         function closeMobileNav(pageId, targetSectionId = null) {
             toggleMobileSidebar();
             navigateTo(pageId, targetSectionId);
@@ -880,25 +1110,17 @@
             {
                 id: 4,
                 isNotice: true,
-                title: "[콘텐츠A 배포] 무작정 외웠던 '근의 공식'의 원리적 이해 리포트.pdf",
-                writer: "콘텐츠A팀",
-                date: "2026.07.05",
-                body: "외우기만 했던 근의 공식이 도출된 배경을 시각적으로 정리한 개념 리포트입니다.<br><br>완전제곱식을 이용한 대수학적 전개 과정을 눈으로 보며 본질을 파헤쳐 보세요. 다운로드 후 궁금한 점은 본 글에 댓글을 달아주시면 멘토단이 실시간으로 답변을 달아 드립니다.",
+                title: "[필독] 커뮤니티 이용 안내",
+                writer: "운영팀",
+                date: "2026.06.24",
+                body: "안녕하세요, STEM입니다.<br><br>모든 이용자가 안전하고 편안하게 소통할 수 있는 커뮤니티를 만들기 위해 아래 이용 수칙을 꼭 지켜주시기 바랍니다.<br>서로를 존중하는 언어와 태도로 소통해 주세요.<br>욕설, 비방, 혐오 표현 및 타인을 불쾌하게 하는 게시글은 삭제될 수 있습니다.<br>개인정보(전화번호, 주소, SNS 계정 등) 공개는 자제해 주세요.<br>광고, 홍보, 도배성 게시글은 사전 안내 없이 삭제될 수 있습니다.<br>허위 정보, 저작권을 침해하는 게시물은 게시가 제한됩니다.<br>커뮤니티 목적과 무관한 게시글은 운영 정책에 따라 이동 또는 삭제될 수 있습니다.<br>모든 회원이 함께 만들어가는 건강한 학습 커뮤니티가 될 수 있도록 많은 협조 부탁드립니다.<br>감사합니다.<br><br>STEM 운영팀 드림",
                 comments: [{ id: 1, writer: "공부방랑자", date: "2026.07.06 14:20", content: "맨날 외우기만 해서 헷갈렸는데 유도 과정을 그림으로 보니까 완전 이해돼요 대박!!" }]
-            },
-            {
-                id: 3,
-                isNotice: false,
-                title: "[콘텐츠B] 배달 알바에서 토스 엔지니어가 되기까지, 개발자 선배의 진짜 공부 조언",
-                writer: "피플팀",
-                date: "2026.06.28",
-                body: "단순히 좋은 대학을 가기 위한 암기 기계처럼 공부하다가 슬럼프를 겪었던 선배들의 리얼 극복기입니다.<br>학점 1점대에서 시작해 자신의 코딩 재미를 발견하고 꿈을 구체화했던 일련의 과정들을 유쾌하게 풀어냈으니, 공부가 손에 안 잡힐 때 한 번씩 꺼내 읽어보세요!",
-                comments: []
             }
-        ];
+  ];
 
         let activeArticleId = null;
 
+        // 페이지 이동 함수 (스크롤 이탈 문제 정교한 조정 해결)
         function navigateTo(pageId, targetSectionId = null) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
@@ -906,13 +1128,23 @@
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
+                resetRevealElements();
+
                 if (targetSectionId) {
+                    // 페이지가 브라우저 DOM에 정확히 활성화된 시점에 타겟 요소를 안전하게 스크롤 처리
                     setTimeout(() => {
                         const section = document.getElementById('target-' + targetSectionId);
                         if (section) {
-                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            const headerOffset = 100; // 네비게이션 가림 높이 보정
+                            const elementPosition = section.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
                         }
-                    }, 80);
+                    }, 150);
                 } else {
                     window.scrollTo({top:0, behavior:'smooth'});
                 }
@@ -955,9 +1187,9 @@
             const renderTarget = document.getElementById('cafe-detail-render-target');
             renderTarget.innerHTML = `
                 <div class="cafe-article-header">
-                    <span style="color:var(--accent); font-weight:800; font-size:0.9rem;">📢 STEM 멤버십 공식 데이터 소통망</span>
-                    <h3 style="font-size:1.6rem; font-weight:900; margin-top:0.5rem; color:#222; line-height:1.4;">${post.title}</h3>
-                    <div style="margin-top:0.8rem; font-size:0.9rem; color:var(--text-muted);">
+                    <span style="color:var(--accent); font-weight:700; font-size:0.85rem;">📢 STEM 멤버십 공식 데이터 소통망</span>
+                    <h3 style="font-size:1.4rem; font-weight:800; margin-top:0.4rem; color:#111; line-height:1.4;">${post.title}</h3>
+                    <div style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-muted);">
                         <span>작성자: <strong>${post.writer}</strong></span> | <span>등록일: ${post.date}</span>
                     </div>
                 </div>
@@ -977,7 +1209,7 @@
             const listUl = document.getElementById('cafe-comment-render-target');
             listUl.innerHTML = '';
             if(post.comments.length === 0) {
-                listUl.innerHTML = `<li style="color:var(--text-muted); font-size:0.9rem; padding:1rem 0;">등록된 실시간 스크럼 댓글이 없습니다. 첫 피드백을 기록해 보세요.</li>`;
+                listUl.innerHTML = `<li style="color:var(--text-muted); font-size:0.85rem; padding:1rem 0;">등록된 실시간 스크럼 댓글이 없습니다. 첫 피드백을 기록해 보세요.</li>`;
                 return;
             }
             post.comments.forEach(c => {
@@ -985,7 +1217,7 @@
                 li.className = 'comment-item';
                 li.innerHTML = `
                     <div class="comment-meta"><span class="comment-writer">${c.writer}</span><span class="comment-date">${c.date}</span></div>
-                    <div style="font-size:0.95rem; color:#444;">${c.content}</div>
+                    <div style="font-size:0.9rem; color:#334155;">${c.content}</div>
                     <button class="comment-delete-btn" onclick="deleteComment(${post.id}, ${c.id})">삭제</button>
                 `;
                 listUl.appendChild(li);
@@ -1033,13 +1265,41 @@
             }
         }
 
+        // 스크롤 감지 모션
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        function resetRevealElements() {
+            const revealElements = document.querySelectorAll('.js-reveal');
+            revealElements.forEach(el => {
+                el.classList.remove('revealed');
+                revealObserver.observe(el);
+            });
+        }
+
+        // 헤더 쉐도우 컨트롤
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         window.onload = function() {
             renderCafeList();
+            resetRevealElements();
         };
 
-        // 구독 신청
+        // 구글 스프레드시트 폼 연동
         document.getElementById('stemConsultingForm').addEventListener('submit', function(e) {
-
             e.preventDefault();
             const btn = document.getElementById('submitFormBtn');
             btn.innerText = "제출중...";
@@ -1070,29 +1330,13 @@
             });
         });
 
-        // 마우스 우클릭 방지
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // 이미지 드래그 방지
-        document.addEventListener('dragstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        });
-
-        // 개발자 도구 방지
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode === 123) {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 67 || e.keyCode === 85)) {
-                e.preventDefault();
-            }
+        // 우클릭 및 키 방지
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 123) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 67 || e.keyCode === 85)) e.preventDefault();
         });
     </script>
 </body>
